@@ -9,13 +9,47 @@ namespace ship
 {
     class Pipes
     {
-        public int quantityPipes { private set; get; }
-
-        public Pipes(int quantity)
+        private Pipesenum _countPipe;
+        public int CountPipe
         {
-            quantityPipes = quantity;
+            set
+            {
+                if (value < 1)
+                {
+                    _countPipe = Pipesenum.one;
+                }
+                if (value == 2)
+                {
+                    _countPipe = Pipesenum.two;
+                }
+                if (value > 3)
+                {
+                    _countPipe = Pipesenum.three;
+                }
+                else
+                {
+                    _countPipe = (Pipesenum)value;
+                }
+            }
+        }
+        public void DrawPipe(Graphics g, float startX, float startY)
+        {
+            if(_countPipe == Pipesenum.one)
+            {
+                Draw1Pipe(g, startX, startY);
+            }
+            if (_countPipe == Pipesenum.two)
+            {
+                Draw2Pipe(g, startX, startY);
+            }
+            if (_countPipe == Pipesenum.three)
+            {
+                Draw1Pipe(g, startX, startY);
+                Draw2Pipe(g, startX, startY);
+            }
         }
         Pen pen = new Pen(Color.Black);
+
         public void Draw1Pipe(Graphics g, float startX, float startY)
         {
             //2 труба

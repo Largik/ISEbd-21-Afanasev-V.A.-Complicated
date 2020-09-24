@@ -44,9 +44,7 @@ namespace ship
             {
                 ship = new Ship(rnd.Next(1000, 3000), rnd.Next(10000, 50000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Color.Red, Color.Blue, true, true);
                 ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
-
-                Draw();
-                
+                Draw();        
             }
             else
             {
@@ -79,8 +77,6 @@ namespace ship
                     break;
             }
             Draw();
-        }
-
-       
+        }  
     }
 }

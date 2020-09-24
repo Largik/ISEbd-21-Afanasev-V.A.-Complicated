@@ -77,11 +77,11 @@ namespace ship
         /// <param name="dopColor">Дополнительный цвет</param>
         /// <param name="cabin">Количество кают</param>
         /// <param name="line">Наличие полосы</param>
-        /// <param name="pipe">Наличие труб</param>
+        /// <param name="countPipe">Наличие труб</param>
         /// <param name="mainColor">Основной цвет корабля</param>
         /// <param name="dopColor">Дополнительный цвет</param>
 
-        public Ship(int maxSpeed, float weight, int pipe, Color mainColor, Color dopColor, bool cabin, bool line)
+        public Ship(int maxSpeed, float weight, int countPipe, Color mainColor, Color dopColor, bool cabin, bool line)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -90,7 +90,8 @@ namespace ship
             Cabin = cabin;
             Line = line;
 
-            pips =new Pipes(pipe);
+            pips = new Pipes();
+            pips.CountPipe = countPipe;
             _maxHeight = 45;
         }
         /// <summary>
@@ -240,19 +241,7 @@ namespace ship
                 g.DrawEllipse(pen, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
                 g.FillEllipse(brWh, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
             }
-            if(pips.quantityPipes == (int)Pipesenum.one)
-            {
-                pips.Draw1Pipe(g, _startPosX, _startPosY);
-            }
-            if (pips.quantityPipes == (int)Pipesenum.two)
-            {
-                pips.Draw2Pipe(g, _startPosX, _startPosY);
-            }
-            if (pips.quantityPipes == (int)Pipesenum.three)
-            {
-                pips.Draw1Pipe(g, _startPosX, _startPosY);
-                pips.Draw2Pipe(g, _startPosX, _startPosY);
-            }
+            pips.DrawPipe(g, _startPosX, _startPosY);
         }
     }
 }
