@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultShip.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FormShip.cs">
       <SubType>Form</SubType>
@@ -53,6 +54,8 @@
     <Compile Include="FormShip.Designer.cs">
       <DependentUpon>FormShip.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITransport.cs" />
+    <Compile Include="MotorShip.cs" />
     <Compile Include="Pipes.cs" />
     <Compile Include="PipesEnum.cs" />
     <Compile Include="Program.cs" />

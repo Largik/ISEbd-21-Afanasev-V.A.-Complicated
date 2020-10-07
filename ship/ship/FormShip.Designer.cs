@@ -35,6 +35,7 @@
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.comboBoxPipes = new System.Windows.Forms.ComboBox();
+            this.buttonCreateMotorShip = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,11 +50,11 @@
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(780, 39);
+            this.buttonCreate.Location = new System.Drawing.Point(780, 12);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
+            this.buttonCreate.Size = new System.Drawing.Size(75, 45);
             this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
+            this.buttonCreate.Text = "Создать корабль";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
@@ -112,17 +113,27 @@
             "1",
             "2",
             "3"});
-            this.comboBoxPipes.Location = new System.Drawing.Point(780, 12);
+            this.comboBoxPipes.Location = new System.Drawing.Point(780, 63);
             this.comboBoxPipes.Name = "comboBoxPipes";
             this.comboBoxPipes.Size = new System.Drawing.Size(75, 21);
             this.comboBoxPipes.TabIndex = 6;
-            
+            // 
+            // buttonCreateMotorShip
+            // 
+            this.buttonCreateMotorShip.Location = new System.Drawing.Point(780, 90);
+            this.buttonCreateMotorShip.Name = "buttonCreateMotorShip";
+            this.buttonCreateMotorShip.Size = new System.Drawing.Size(75, 36);
+            this.buttonCreateMotorShip.TabIndex = 7;
+            this.buttonCreateMotorShip.Text = "Создать теплоход";
+            this.buttonCreateMotorShip.UseVisualStyleBackColor = true;
+            this.buttonCreateMotorShip.Click += new System.EventHandler(this.buttonCreateMotorShip_Click);
             // 
             // FormShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.buttonCreateMotorShip);
             this.Controls.Add(this.comboBoxPipes);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonLeft);
@@ -147,6 +158,7 @@
         protected System.Windows.Forms.Button buttonDown;
         protected System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.ComboBox comboBoxPipes;
+        private System.Windows.Forms.Button buttonCreateMotorShip;
     }
 }
 

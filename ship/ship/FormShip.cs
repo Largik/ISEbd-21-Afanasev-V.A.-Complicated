@@ -33,26 +33,37 @@ namespace ship
             pictureBoxShip.Image = bmp;
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Создать"
+        /// Обработка нажатия кнопки "Создать корабль"
         /// </summary>
         /// /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
+            ship = new DefaultShip(rnd.Next(1000, 3000), rnd.Next(10000, 50000), Color.Red, Color.Blue);
+            ship.SetPosition(100, 100, pictureBoxShip.Width, pictureBoxShip.Height);
+            Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Создать теплоход"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCreateMotorShip_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
             if (comboBoxPipes.SelectedIndex > -1)
             {
-                ship = new Ship(rnd.Next(1000, 3000), rnd.Next(10000, 50000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Color.Red, Color.Blue, true, true);
-                ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
-
+                ship = new MotorShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Color.Purple,
+           Color.Blue, true, true);
+                ship.SetPosition(200, 100, pictureBoxShip.Width,
+               pictureBoxShip.Height);
                 Draw();
-                
             }
             else
             {
-                MessageBox.Show("Выберете количество труб");
+                MessageBox.Show("Укажите количество труб");
             }
-           
         }
         /// <summary>
         /// Обработка нажатия кнопок управления
@@ -81,6 +92,6 @@ namespace ship
             Draw();
         }
 
-       
+        
     }
 }
