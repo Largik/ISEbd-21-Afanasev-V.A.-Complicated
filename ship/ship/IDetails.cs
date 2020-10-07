@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace ship
 {
-    public enum Pipesenum
+    interface IDetails
     {
-        one = 1,
-        two = 2,
-        three = 3
+        void DrawDetails(Graphics g);
     }
 }

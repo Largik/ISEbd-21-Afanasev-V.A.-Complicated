@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ship
 {
-    interface Interface1
+    public enum DetailsEnum
     {
+        one = 1,
+        two = 2,
+        three = 3,
+        four = 4,
+        five = 5
     }
 }

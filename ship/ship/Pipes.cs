@@ -7,15 +7,47 @@ using System.Threading.Tasks;
 
 namespace ship
 {
-    class Pipes
+    class Pipes : DopDetails
     {
-        public int quantityPipes { private set; get; }
-
-        public Pipes(int quantity)
+        private DetailsEnum _countPipe;
+        public int CountPipe
         {
-            quantityPipes = quantity;
+            set
+            {
+                if (value < 1)
+                {
+                    _countPipe = DetailsEnum.one;
+                }
+                if (value == 2)
+                {
+                    _countPipe = DetailsEnum.two;
+                }
+                if (value > 3)
+                {
+                    _countPipe = DetailsEnum.three;
+                }
+                else
+                {
+                    _countPipe = (DetailsEnum)value;
+                }
+            }
         }
-        Pen pen = new Pen(Color.Black);
+        public override void DrawDetails(Graphics g)
+        {
+            if (_countPipe == DetailsEnum.one)
+            {
+                Draw1Pipe(g, _startX, _startY);
+            }
+            if (_countPipe == DetailsEnum.two)
+            {
+                Draw2Pipe(g, _startX, _startY);
+            }
+            if (_countPipe == DetailsEnum.three)
+            {
+                Draw1Pipe(g, _startX, _startY);
+                Draw2Pipe(g, _startX, _startY);
+            }
+        }
         public void Draw1Pipe(Graphics g, float startX, float startY)
         {
             //2 труба
