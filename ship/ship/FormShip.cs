@@ -72,7 +72,7 @@ namespace ship
                 }
                 else
                 {
-                    MessageBox.Show("Укажите количество линий на палубе");
+                    MessageBox.Show("Укажите форму кают");
                 }
             }
             else

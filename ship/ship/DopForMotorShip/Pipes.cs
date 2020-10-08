@@ -32,7 +32,7 @@ namespace ship
                 }
             }
         }
-        public override void DrawDetails(Graphics g)
+        public override void SetDetails(Graphics g)
         {
             if (_countPipe == DetailsEnum.one)
             {

@@ -9,9 +9,8 @@ namespace ship
 {
     public class MotorShip : DefaultShip
     {
-        private Cabin cab;
+        private CountCabin cab;
         private Pipes pips;
-        private Line lin;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -20,11 +19,11 @@ namespace ship
         /// /// <param name="mainColor">Основной цвет кузова</param>
         /// <param name="dopColor">Дополнительный цвет</param>
         /// <param name="cabin">Количество кают</param>
-        /// <param name="line">Наличие полосы</param>
+        /// <param name="fCabin">Наличие полосы</param>
         /// <param name="pipe">Наличие труб</param>
         /// <param name="mainColor">Основной цвет корабля</param>
         /// <param name="dopColor">Дополнительный цвет</param>
-        public MotorShip(int maxSpeed, float weight, int pipe, int line, int cabin, Color mainColor,
+        public MotorShip(int maxSpeed, float weight, int pipe, int fCabin, int cabin, Color mainColor,
             Color dopColor) :
             base(maxSpeed, weight, mainColor, 120, 58)
         {
@@ -32,12 +31,11 @@ namespace ship
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
-            cab = new Cabin();
-            cab.CountCabin = cabin;
+            cab = new CountCabin();
+            cab.countCabin = cabin;
+            cab.SetForm(fCabin);
             pips = new Pipes();
             pips.CountPipe = pipe;
-            lin = new Line();
-            lin.CountLine = line;
         }
         /// <summary>
         /// Отрисовка корабля
@@ -49,8 +47,17 @@ namespace ship
             //Brush brush = new SolidBrush(MainColor);
             SolidBrush brWh = new SolidBrush(Color.White);
             base.DrawTransport(g);
-            lin.SetData((int)_startPosX, (int)_startPosY);
-            lin.DrawDetails(g);
+            Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
+            Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
+            Point line3 = new Point((int)_startPosX + 118, (int)_startPosY + 14);
+            Point line4 = new Point((int)_startPosX + 8, (int)_startPosY + 16);
+            Point line5 = new Point((int)_startPosX + 66, (int)_startPosY + 20);
+            Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
+            Point[] linePoints1 = { line1, line2, line3 };
+            Point[] linePoints2 = { line4, line5, line6 };
+
+            g.DrawCurve(pen, linePoints1);
+            g.DrawCurve(pen, linePoints2);
             //якорь   
             g.FillEllipse(brWh, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
             g.DrawEllipse(pen, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
@@ -66,9 +73,9 @@ namespace ship
             g.FillRectangle(brWh, (int)_startPosX + 27, (int)_startPosY + 26, 14, 2);
             g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);
             cab.SetData((int)_startPosX, (int)_startPosY);
-            cab.DrawDetails(g);
+            cab.SetDetails(g);
             pips.SetData((int)_startPosX, (int)_startPosY);
-            pips.DrawDetails(g);
+            pips.SetDetails(g);
         }
     }
 }

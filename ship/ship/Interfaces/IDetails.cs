@@ -9,6 +9,6 @@ namespace ship
 {
     interface IDetails
     {
-        void DrawDetails(Graphics g);
+        void SetDetails(Graphics g);
     }
 }

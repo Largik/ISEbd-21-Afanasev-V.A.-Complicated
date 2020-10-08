@@ -125,7 +125,7 @@
             // 
             // buttonCreateMotorShip
             // 
-            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 212);
+            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 235);
             this.buttonCreateMotorShip.Name = "buttonCreateMotorShip";
             this.buttonCreateMotorShip.Size = new System.Drawing.Size(75, 36);
             this.buttonCreateMotorShip.TabIndex = 7;
@@ -148,7 +148,7 @@
             this.comboBoxLine.Items.AddRange(new object[] {
             "1",
             "2"});
-            this.comboBoxLine.Location = new System.Drawing.Point(761, 135);
+            this.comboBoxLine.Location = new System.Drawing.Point(761, 161);
             this.comboBoxLine.Name = "comboBoxLine";
             this.comboBoxLine.Size = new System.Drawing.Size(75, 21);
             this.comboBoxLine.TabIndex = 9;
@@ -160,7 +160,7 @@
             "3",
             "4",
             "5"});
-            this.comboBoxCabin.Location = new System.Drawing.Point(761, 173);
+            this.comboBoxCabin.Location = new System.Drawing.Point(761, 208);
             this.comboBoxCabin.Name = "comboBoxCabin";
             this.comboBoxCabin.Size = new System.Drawing.Size(75, 21);
             this.comboBoxCabin.TabIndex = 10;
@@ -168,16 +168,16 @@
             // labelCountLine
             // 
             this.labelCountLine.AutoSize = true;
-            this.labelCountLine.Location = new System.Drawing.Point(747, 119);
+            this.labelCountLine.Location = new System.Drawing.Point(733, 119);
             this.labelCountLine.Name = "labelCountLine";
-            this.labelCountLine.Size = new System.Drawing.Size(102, 13);
+            this.labelCountLine.Size = new System.Drawing.Size(139, 39);
             this.labelCountLine.TabIndex = 11;
-            this.labelCountLine.Text = "Количество линий ";
+            this.labelCountLine.Text = "Выберите форму кают\r\n1 - круглая 2 - квадратная\r\n\r\n";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(755, 157);
+            this.label1.Location = new System.Drawing.Point(755, 192);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 12;
