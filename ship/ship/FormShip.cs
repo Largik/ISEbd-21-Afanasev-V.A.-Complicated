@@ -21,7 +21,7 @@ namespace ship
         {
             InitializeComponent();
             comboBoxPipes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBoxLine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxFormCabin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxCabin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         }
         /// <summary>
@@ -56,11 +56,21 @@ namespace ship
             Random rnd = new Random();
             if (comboBoxPipes.SelectedIndex > -1)
             {
-                if (comboBoxLine.SelectedIndex > -1)
+                if (comboBoxFormCabin.SelectedIndex > -1)
                 {
+                    int fCabin;
+                    string fCab = comboBoxFormCabin.SelectedItem.ToString();
+                    if(fCab == "Квадратная")
+                    {
+                        fCabin = 2;
+                    }
+                    else
+                    {
+                        fCabin = 1;
+                    }
                     if (comboBoxCabin.SelectedIndex > -1)
                     {
-                        ship = new MotorShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Convert.ToInt32(comboBoxLine.SelectedItem.ToString()), Convert.ToInt32(comboBoxCabin.SelectedItem.ToString()), Color.Purple,Color.Blue);
+                        ship = new MotorShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fCabin, Convert.ToInt32(comboBoxCabin.SelectedItem.ToString()), Color.Purple,Color.Blue);
                         ship.SetPosition(200, 100, pictureBoxShip.Width,
                        pictureBoxShip.Height);
                         Draw();

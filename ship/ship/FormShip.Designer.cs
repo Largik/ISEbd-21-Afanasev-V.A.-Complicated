@@ -37,7 +37,7 @@
             this.comboBoxPipes = new System.Windows.Forms.ComboBox();
             this.buttonCreateMotorShip = new System.Windows.Forms.Button();
             this.labelCountPipes = new System.Windows.Forms.Label();
-            this.comboBoxLine = new System.Windows.Forms.ComboBox();
+            this.comboBoxFormCabin = new System.Windows.Forms.ComboBox();
             this.comboBoxCabin = new System.Windows.Forms.ComboBox();
             this.labelCountLine = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             // 
             this.buttonCreate.Location = new System.Drawing.Point(761, 12);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 45);
+            this.buttonCreate.Size = new System.Drawing.Size(88, 45);
             this.buttonCreate.TabIndex = 1;
             this.buttonCreate.Text = "Создать корабль";
             this.buttonCreate.UseVisualStyleBackColor = true;
@@ -120,14 +120,14 @@
             "3"});
             this.comboBoxPipes.Location = new System.Drawing.Point(761, 95);
             this.comboBoxPipes.Name = "comboBoxPipes";
-            this.comboBoxPipes.Size = new System.Drawing.Size(75, 21);
+            this.comboBoxPipes.Size = new System.Drawing.Size(88, 21);
             this.comboBoxPipes.TabIndex = 6;
             // 
             // buttonCreateMotorShip
             // 
-            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 235);
+            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 202);
             this.buttonCreateMotorShip.Name = "buttonCreateMotorShip";
-            this.buttonCreateMotorShip.Size = new System.Drawing.Size(75, 36);
+            this.buttonCreateMotorShip.Size = new System.Drawing.Size(88, 36);
             this.buttonCreateMotorShip.TabIndex = 7;
             this.buttonCreateMotorShip.Text = "Создать теплоход";
             this.buttonCreateMotorShip.UseVisualStyleBackColor = true;
@@ -142,16 +142,16 @@
             this.labelCountPipes.TabIndex = 8;
             this.labelCountPipes.Text = "Количество труб";
             // 
-            // comboBoxLine
+            // comboBoxFormCabin
             // 
-            this.comboBoxLine.FormattingEnabled = true;
-            this.comboBoxLine.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.comboBoxLine.Location = new System.Drawing.Point(761, 161);
-            this.comboBoxLine.Name = "comboBoxLine";
-            this.comboBoxLine.Size = new System.Drawing.Size(75, 21);
-            this.comboBoxLine.TabIndex = 9;
+            this.comboBoxFormCabin.FormattingEnabled = true;
+            this.comboBoxFormCabin.Items.AddRange(new object[] {
+            "Круглая",
+            "Квадратная"});
+            this.comboBoxFormCabin.Location = new System.Drawing.Point(761, 135);
+            this.comboBoxFormCabin.Name = "comboBoxFormCabin";
+            this.comboBoxFormCabin.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxFormCabin.TabIndex = 9;
             // 
             // comboBoxCabin
             // 
@@ -160,24 +160,24 @@
             "3",
             "4",
             "5"});
-            this.comboBoxCabin.Location = new System.Drawing.Point(761, 208);
+            this.comboBoxCabin.Location = new System.Drawing.Point(761, 175);
             this.comboBoxCabin.Name = "comboBoxCabin";
-            this.comboBoxCabin.Size = new System.Drawing.Size(75, 21);
+            this.comboBoxCabin.Size = new System.Drawing.Size(88, 21);
             this.comboBoxCabin.TabIndex = 10;
             // 
             // labelCountLine
             // 
             this.labelCountLine.AutoSize = true;
-            this.labelCountLine.Location = new System.Drawing.Point(733, 119);
+            this.labelCountLine.Location = new System.Drawing.Point(747, 119);
             this.labelCountLine.Name = "labelCountLine";
-            this.labelCountLine.Size = new System.Drawing.Size(139, 39);
+            this.labelCountLine.Size = new System.Drawing.Size(121, 13);
             this.labelCountLine.TabIndex = 11;
-            this.labelCountLine.Text = "Выберите форму кают\r\n1 - круглая 2 - квадратная\r\n\r\n";
+            this.labelCountLine.Text = "Выберите форму кают";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(755, 192);
+            this.label1.Location = new System.Drawing.Point(755, 159);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 12;
@@ -191,7 +191,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelCountLine);
             this.Controls.Add(this.comboBoxCabin);
-            this.Controls.Add(this.comboBoxLine);
+            this.Controls.Add(this.comboBoxFormCabin);
             this.Controls.Add(this.labelCountPipes);
             this.Controls.Add(this.buttonCreateMotorShip);
             this.Controls.Add(this.comboBoxPipes);
@@ -221,7 +221,7 @@
         private System.Windows.Forms.ComboBox comboBoxPipes;
         private System.Windows.Forms.Button buttonCreateMotorShip;
         private System.Windows.Forms.Label labelCountPipes;
-        private System.Windows.Forms.ComboBox comboBoxLine;
+        private System.Windows.Forms.ComboBox comboBoxFormCabin;
         private System.Windows.Forms.ComboBox comboBoxCabin;
         private System.Windows.Forms.Label labelCountLine;
         private System.Windows.Forms.Label label1;
