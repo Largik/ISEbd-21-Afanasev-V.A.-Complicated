@@ -14,9 +14,13 @@ namespace ship
     class Port<T, A> where T : class, ITransport where A: class, IDetails
     {
         /// <summary>
-        /// Массив объектов, которые храним
+        /// Список объектов, которые храним
         /// </summary>
-        private readonly T[] _places;
+        private readonly List<T> _places;
+        /// <summary>
+        /// Максимальное количество мест на парковке
+        /// </summary>
+        private readonly int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -54,8 +58,9 @@ namespace ship
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
+            _maxCount = width * height;
             _column = height;
-            _places = new T[width * height];
+            _places = new List<T>();
             _pictureWidth = picWidth;
             _pictureHeight = picHeight;
         }
@@ -68,17 +73,12 @@ namespace ship
         /// <returns></returns>
         public static bool operator +(Port<T, A> Port, T ship)
         {
-            for (int index = 0; index < Port._places.Length; index++)
+            if (Port._places.Count >= Port._maxCount)
             {
-                if (Port._places[index] == null)
-                {
-                    Port._places[index] = ship;
-                    ship.SetPosition(index / Port._column * Port._placeSizeWidth + 5, 50 + index % Port._column * Port._placeSizeHeight,
-                    Port._pictureWidth, Port._pictureHeight);
-                    return true;
-                }
+                return false;
             }
-            return false;
+            Port._places.Add(ship);
+            return true;
         }
         /// <summary>
         /// Перегрузка оператора вычитания
@@ -89,21 +89,18 @@ namespace ship
         /// <returns></returns>
         public static T operator -(Port<T, A> Port, int index)
         {
-            if (index >= 0 && index < Port._places.Length)
-            {
-                T ship = Port._places[index];
-                Port._places[index] = null;
-                return ship;
-            }
-            else
+            if (index < -1 || index > Port._places.Count)
             {
                 return null;
             }
+            T ship = Port._places[index];
+            Port._places.RemoveAt(index);
+            return ship;
         }
         public static bool operator >(Port<T, A> Port, int count)
         {
             int placeCount = 0;
-            for (int i = 0; i < Port._places.Length; i++)
+            for (int i = 0; i < Port._places.Count; i++)
             {
                 if (Port._places[i] != null)
                 {
@@ -119,7 +116,7 @@ namespace ship
         public static bool operator <(Port<T, A> Port, int count)
         {
             int placeCount = 0;
-            for (int i = 0; i < Port._places.Length; i++)
+            for (int i = 0; i < Port._places.Count; i++)
             {
                 if (Port._places[i] != null)
                 {
@@ -139,9 +136,11 @@ namespace ship
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i]?.DrawTransport(g);
+                _places[i].SetPosition(i / _column * _placeSizeWidth + 5, 50 + i % _column * _placeSizeHeight,
+                   _pictureWidth, _pictureHeight);
+                _places[i].DrawTransport(g);
             }
         }
         /// <summary>

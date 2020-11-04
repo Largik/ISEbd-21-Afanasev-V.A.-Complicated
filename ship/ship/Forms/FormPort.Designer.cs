@@ -41,6 +41,11 @@
             this.comboBoxFormCabin = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCabin = new System.Windows.Forms.ComboBox();
+            this.listBoxPorts = new System.Windows.Forms.ListBox();
+            this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
+            this.buttonAddPort = new System.Windows.Forms.Button();
+            this.buttonDeletePort = new System.Windows.Forms.Button();
+            this.labelNamePort = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPort)).BeginInit();
             this.groupBoxTakeShip.SuspendLayout();
             this.SuspendLayout();
@@ -50,15 +55,15 @@
             this.pictureBoxPort.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBoxPort.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxPort.Name = "pictureBoxPort";
-            this.pictureBoxPort.Size = new System.Drawing.Size(686, 450);
+            this.pictureBoxPort.Size = new System.Drawing.Size(686, 531);
             this.pictureBoxPort.TabIndex = 1;
             this.pictureBoxPort.TabStop = false;
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(709, 12);
+            this.buttonCreate.Location = new System.Drawing.Point(710, 240);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(137, 45);
+            this.buttonCreate.Size = new System.Drawing.Size(151, 24);
             this.buttonCreate.TabIndex = 9;
             this.buttonCreate.Text = "Припарковать корабль";
             this.buttonCreate.UseVisualStyleBackColor = true;
@@ -66,9 +71,9 @@
             // 
             // buttonCreateMotorShip
             // 
-            this.buttonCreateMotorShip.Location = new System.Drawing.Point(710, 234);
+            this.buttonCreateMotorShip.Location = new System.Drawing.Point(710, 390);
             this.buttonCreateMotorShip.Name = "buttonCreateMotorShip";
-            this.buttonCreateMotorShip.Size = new System.Drawing.Size(136, 58);
+            this.buttonCreateMotorShip.Size = new System.Drawing.Size(151, 23);
             this.buttonCreateMotorShip.TabIndex = 10;
             this.buttonCreateMotorShip.Text = "Припарковать теплоход";
             this.buttonCreateMotorShip.UseVisualStyleBackColor = true;
@@ -79,9 +84,9 @@
             this.groupBoxTakeShip.Controls.Add(this.buttonTakeShip);
             this.groupBoxTakeShip.Controls.Add(this.maskedTextBoxPlaceShip);
             this.groupBoxTakeShip.Controls.Add(this.labelPlace);
-            this.groupBoxTakeShip.Location = new System.Drawing.Point(710, 321);
+            this.groupBoxTakeShip.Location = new System.Drawing.Point(710, 419);
             this.groupBoxTakeShip.Name = "groupBoxTakeShip";
-            this.groupBoxTakeShip.Size = new System.Drawing.Size(136, 100);
+            this.groupBoxTakeShip.Size = new System.Drawing.Size(151, 100);
             this.groupBoxTakeShip.TabIndex = 11;
             this.groupBoxTakeShip.TabStop = false;
             this.groupBoxTakeShip.Text = "Забрать Судно";
@@ -115,7 +120,7 @@
             // labelCountPipes
             // 
             this.labelCountPipes.AutoSize = true;
-            this.labelCountPipes.Location = new System.Drawing.Point(707, 71);
+            this.labelCountPipes.Location = new System.Drawing.Point(707, 267);
             this.labelCountPipes.Name = "labelCountPipes";
             this.labelCountPipes.Size = new System.Drawing.Size(91, 13);
             this.labelCountPipes.TabIndex = 12;
@@ -128,19 +133,19 @@
             "1",
             "2",
             "3"});
-            this.comboBoxPipes.Location = new System.Drawing.Point(709, 87);
+            this.comboBoxPipes.Location = new System.Drawing.Point(710, 283);
             this.comboBoxPipes.Name = "comboBoxPipes";
-            this.comboBoxPipes.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxPipes.Size = new System.Drawing.Size(151, 21);
             this.comboBoxPipes.TabIndex = 13;
             // 
             // labelCountLine
             // 
             this.labelCountLine.AutoSize = true;
-            this.labelCountLine.Location = new System.Drawing.Point(706, 111);
+            this.labelCountLine.Location = new System.Drawing.Point(707, 307);
             this.labelCountLine.Name = "labelCountLine";
-            this.labelCountLine.Size = new System.Drawing.Size(121, 13);
+            this.labelCountLine.Size = new System.Drawing.Size(72, 13);
             this.labelCountLine.TabIndex = 14;
-            this.labelCountLine.Text = "Выберите форму кают";
+            this.labelCountLine.Text = "Форма кают";
             // 
             // comboBoxFormCabin
             // 
@@ -148,15 +153,15 @@
             this.comboBoxFormCabin.Items.AddRange(new object[] {
             "Круглая",
             "Квадратная"});
-            this.comboBoxFormCabin.Location = new System.Drawing.Point(709, 129);
+            this.comboBoxFormCabin.Location = new System.Drawing.Point(710, 323);
             this.comboBoxFormCabin.Name = "comboBoxFormCabin";
-            this.comboBoxFormCabin.Size = new System.Drawing.Size(135, 21);
+            this.comboBoxFormCabin.Size = new System.Drawing.Size(151, 21);
             this.comboBoxFormCabin.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(707, 153);
+            this.label1.Location = new System.Drawing.Point(707, 347);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 16;
@@ -169,16 +174,66 @@
             "3",
             "4",
             "5"});
-            this.comboBoxCabin.Location = new System.Drawing.Point(710, 169);
+            this.comboBoxCabin.Location = new System.Drawing.Point(710, 363);
             this.comboBoxCabin.Name = "comboBoxCabin";
-            this.comboBoxCabin.Size = new System.Drawing.Size(136, 21);
+            this.comboBoxCabin.Size = new System.Drawing.Size(151, 21);
             this.comboBoxCabin.TabIndex = 17;
+            // 
+            // listBoxPorts
+            // 
+            this.listBoxPorts.FormattingEnabled = true;
+            this.listBoxPorts.Location = new System.Drawing.Point(710, 83);
+            this.listBoxPorts.Name = "listBoxPorts";
+            this.listBoxPorts.Size = new System.Drawing.Size(151, 121);
+            this.listBoxPorts.TabIndex = 18;
+            this.listBoxPorts.SelectedIndexChanged += new System.EventHandler(this.listBoxPorts_SelectedIndexChanged);
+            // 
+            // textBoxNewLevelName
+            // 
+            this.textBoxNewLevelName.Location = new System.Drawing.Point(710, 26);
+            this.textBoxNewLevelName.Name = "textBoxNewLevelName";
+            this.textBoxNewLevelName.Size = new System.Drawing.Size(151, 20);
+            this.textBoxNewLevelName.TabIndex = 19;
+            // 
+            // buttonAddPort
+            // 
+            this.buttonAddPort.Location = new System.Drawing.Point(710, 54);
+            this.buttonAddPort.Name = "buttonAddPort";
+            this.buttonAddPort.Size = new System.Drawing.Size(151, 23);
+            this.buttonAddPort.TabIndex = 20;
+            this.buttonAddPort.Text = "Добавить парковку";
+            this.buttonAddPort.UseVisualStyleBackColor = true;
+            this.buttonAddPort.Click += new System.EventHandler(this.buttonAddPort_Click);
+            // 
+            // buttonDeletePort
+            // 
+            this.buttonDeletePort.Location = new System.Drawing.Point(710, 210);
+            this.buttonDeletePort.Name = "buttonDeletePort";
+            this.buttonDeletePort.Size = new System.Drawing.Size(151, 23);
+            this.buttonDeletePort.TabIndex = 21;
+            this.buttonDeletePort.Text = "Удалить парковку";
+            this.buttonDeletePort.UseVisualStyleBackColor = true;
+            this.buttonDeletePort.Click += new System.EventHandler(this.buttonDeletePort_Click);
+            // 
+            // labelNamePort
+            // 
+            this.labelNamePort.AutoSize = true;
+            this.labelNamePort.Location = new System.Drawing.Point(761, 10);
+            this.labelNamePort.Name = "labelNamePort";
+            this.labelNamePort.Size = new System.Drawing.Size(40, 13);
+            this.labelNamePort.TabIndex = 22;
+            this.labelNamePort.Text = "Порты";
             // 
             // FormPort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 450);
+            this.ClientSize = new System.Drawing.Size(873, 531);
+            this.Controls.Add(this.labelNamePort);
+            this.Controls.Add(this.buttonDeletePort);
+            this.Controls.Add(this.buttonAddPort);
+            this.Controls.Add(this.textBoxNewLevelName);
+            this.Controls.Add(this.listBoxPorts);
             this.Controls.Add(this.comboBoxCabin);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxFormCabin);
@@ -214,5 +269,10 @@
         private System.Windows.Forms.ComboBox comboBoxFormCabin;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxCabin;
+        private System.Windows.Forms.ListBox listBoxPorts;
+        private System.Windows.Forms.TextBox textBoxNewLevelName;
+        private System.Windows.Forms.Button buttonAddPort;
+        private System.Windows.Forms.Button buttonDeletePort;
+        private System.Windows.Forms.Label labelNamePort;
     }
 }

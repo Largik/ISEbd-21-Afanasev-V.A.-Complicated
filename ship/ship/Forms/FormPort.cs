@@ -13,24 +13,46 @@ namespace ship
     public partial class FormPort : Form
     {
         /// <summary>
-        /// Объект от класса-порта
+        /// Объект от класса-коллекции парковок
         /// </summary>
-        private readonly Port<DefaultShip, DopDetails> _port;
+        private readonly PortCollection portCollection;
         public FormPort()
         {
             InitializeComponent();
-            _port = new Port<DefaultShip, DopDetails>(pictureBoxPort.Width, pictureBoxPort.Height);
-            Draw();
+            portCollection = new PortCollection(pictureBoxPort.Width, pictureBoxPort.Height);
+        }
+        /// <summary>
+        /// Заполнение listBoxLevels
+        /// </summary>
+        private void ReloadLevels()
+        {
+            int index = listBoxPorts.SelectedIndex;
+            listBoxPorts.Items.Clear();
+            for (int i = 0; i < portCollection.Keys.Count; i++)
+            {
+                listBoxPorts.Items.Add(portCollection.Keys[i]);
+            }
+            if (listBoxPorts.Items.Count > 0 && (index == -1 || index >= listBoxPorts.Items.Count))
+            {
+                listBoxPorts.SelectedIndex = 0;
+            }
+            else if (listBoxPorts.Items.Count > 0 && index > -1 && index < listBoxPorts.Items.Count)
+            {
+                listBoxPorts.SelectedIndex = index;
+            }
         }
         /// <summary>
         /// Метод отрисовки порта
         /// </summary>
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxPort.Width, pictureBoxPort.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            _port.Draw(gr);
-            pictureBoxPort.Image = bmp;
+            if (listBoxPorts.SelectedIndex > -1)
+            {
+                Bitmap bmp = new Bitmap(pictureBoxPort.Width, pictureBoxPort.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                portCollection[listBoxPorts.SelectedItem.ToString()].Draw(gr);
+                pictureBoxPort.Image = bmp;
+            }
         }
         /// <summary>
         /// Обработка нажатия кнопки "Припарковать корабль"
@@ -39,18 +61,20 @@ namespace ship
         /// <param name="e"></param>
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxPorts.SelectedIndex > -1)
             {
-                var boat = new DefaultShip(100, 1000, dialog.Color);
-                boat.SetPosition(_port.XShip, _port.YShip, pictureBoxPort.Width, pictureBoxPort.Height);
-                if (_port + boat)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Порт переполнен");
+                    var ship = new DefaultShip(100, 1000, dialog.Color);
+                    if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
+                    {
+                        Draw();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Порт переполнен");
+                    }
                 }
             }
         }
@@ -61,55 +85,58 @@ namespace ship
         /// <param name="e"></param>
         private void buttonCreateMotorShip_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxPorts.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Random rnd = new Random();
-                    if (comboBoxPipes.SelectedIndex > -1)
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
                     {
-                        if (comboBoxFormCabin.SelectedIndex > -1)
+                        Random rnd = new Random();
+                        if (comboBoxPipes.SelectedIndex > -1)
                         {
-                            int fCabin;
-                            string text = comboBoxFormCabin.Text;
-                            if (text == "Квадратная")
+                            if (comboBoxFormCabin.SelectedIndex > -1)
                             {
-                                fCabin = 2;
-                            }
-                            else
-                            {
-                                fCabin = 1;
-                            }
-
-                            if (comboBoxCabin.SelectedIndex > -1)
-                            {
-                                var mBoat = new MotorShip(rnd.Next(100, 300), rnd.Next(1000, 2000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fCabin, Convert.ToInt32(comboBoxCabin.SelectedItem.ToString()), dialog.Color, dialogDop.Color);
-                                if (_port + mBoat)
+                                int fCabin;
+                                string text = comboBoxFormCabin.Text;
+                                if (text == "Квадратная")
                                 {
-                                    Draw();
+                                    fCabin = 2;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Порт переполнен");
+                                    fCabin = 1;
+                                }
+
+                                if (comboBoxCabin.SelectedIndex > -1)
+                                {
+                                    var ship = new MotorShip(100, 1000, Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fCabin, Convert.ToInt32(comboBoxCabin.SelectedItem.ToString()), dialog.Color, dialogDop.Color);
+                                    if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
+                                    {
+                                        Draw();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Порт переполнен");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Укажите количество кают");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("Укажите количество кают");
+                                MessageBox.Show("Укажите форму кают");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Укажите форму кают");
+                            MessageBox.Show("Укажите количество труб");
                         }
+
                     }
-                    else
-                    {
-                        MessageBox.Show("Укажите количество труб");
-                    }
-                   
                 }
             }
         }
@@ -120,23 +147,45 @@ namespace ship
         /// <param name="e"></param>
         private void buttonTakeShip_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(maskedTextBoxPlaceShip.Text))
+            if (listBoxPorts.SelectedIndex > -1 && maskedTextBoxPlaceShip.Text != "")
             {
-                int index = Convert.ToInt32(maskedTextBoxPlaceShip.Text);
-                var ship = _port - index;
-
+                var ship = portCollection[listBoxPorts.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxPlaceShip.Text);
                 if (ship != null)
                 {
                     FormShip form = new FormShip();
                     form.SetShip(ship);
                     form.ShowDialog();
-                    Draw();
                 }
-                else
+                Draw();
+            }
+        }
+
+        private void buttonAddPort_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
+            {
+                MessageBox.Show("Введите название парковки", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            portCollection.AddPort(textBoxNewLevelName.Text);
+            ReloadLevels();
+        }
+
+        private void buttonDeletePort_Click(object sender, EventArgs e)
+        {
+            if (listBoxPorts.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку { listBoxPorts.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Место в порту с данным индексом пустое");
+                    portCollection.DelPort(textBoxNewLevelName.Text);
+                    ReloadLevels();
                 }
             }
+        }
+        private void listBoxPorts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
         }
     }
 }
