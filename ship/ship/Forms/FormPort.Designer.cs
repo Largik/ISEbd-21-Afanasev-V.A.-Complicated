@@ -32,7 +32,8 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCreateMotorShip = new System.Windows.Forms.Button();
             this.groupBoxTakeShip = new System.Windows.Forms.GroupBox();
-            this.buttonTakeShip = new System.Windows.Forms.Button();
+            this.buttonTakeFromRemoved = new System.Windows.Forms.Button();
+            this.buttonTakeShipFromPort = new System.Windows.Forms.Button();
             this.maskedTextBoxPlaceShip = new System.Windows.Forms.MaskedTextBox();
             this.labelPlace = new System.Windows.Forms.Label();
             this.labelCountPipes = new System.Windows.Forms.Label();
@@ -55,7 +56,7 @@
             this.pictureBoxPort.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBoxPort.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxPort.Name = "pictureBoxPort";
-            this.pictureBoxPort.Size = new System.Drawing.Size(686, 531);
+            this.pictureBoxPort.Size = new System.Drawing.Size(686, 567);
             this.pictureBoxPort.TabIndex = 1;
             this.pictureBoxPort.TabStop = false;
             // 
@@ -81,25 +82,36 @@
             // 
             // groupBoxTakeShip
             // 
-            this.groupBoxTakeShip.Controls.Add(this.buttonTakeShip);
+            this.groupBoxTakeShip.Controls.Add(this.buttonTakeFromRemoved);
+            this.groupBoxTakeShip.Controls.Add(this.buttonTakeShipFromPort);
             this.groupBoxTakeShip.Controls.Add(this.maskedTextBoxPlaceShip);
             this.groupBoxTakeShip.Controls.Add(this.labelPlace);
             this.groupBoxTakeShip.Location = new System.Drawing.Point(710, 419);
             this.groupBoxTakeShip.Name = "groupBoxTakeShip";
-            this.groupBoxTakeShip.Size = new System.Drawing.Size(151, 100);
+            this.groupBoxTakeShip.Size = new System.Drawing.Size(151, 136);
             this.groupBoxTakeShip.TabIndex = 11;
             this.groupBoxTakeShip.TabStop = false;
             this.groupBoxTakeShip.Text = "Забрать Судно";
             // 
-            // buttonTakeShip
+            // buttonTakeFromRemoved
             // 
-            this.buttonTakeShip.Location = new System.Drawing.Point(9, 62);
-            this.buttonTakeShip.Name = "buttonTakeShip";
-            this.buttonTakeShip.Size = new System.Drawing.Size(121, 23);
-            this.buttonTakeShip.TabIndex = 10;
-            this.buttonTakeShip.Text = "Забрать ";
-            this.buttonTakeShip.UseVisualStyleBackColor = true;
-            this.buttonTakeShip.Click += new System.EventHandler(this.buttonTakeShip_Click);
+            this.buttonTakeFromRemoved.Location = new System.Drawing.Point(9, 91);
+            this.buttonTakeFromRemoved.Name = "buttonTakeFromRemoved";
+            this.buttonTakeFromRemoved.Size = new System.Drawing.Size(121, 39);
+            this.buttonTakeFromRemoved.TabIndex = 11;
+            this.buttonTakeFromRemoved.Text = "Взять забранный корабль";
+            this.buttonTakeFromRemoved.UseVisualStyleBackColor = true;
+            this.buttonTakeFromRemoved.Click += new System.EventHandler(this.buttonTakeFromRemoved_Click);
+            // 
+            // buttonTakeShipFromPort
+            // 
+            this.buttonTakeShipFromPort.Location = new System.Drawing.Point(9, 62);
+            this.buttonTakeShipFromPort.Name = "buttonTakeShipFromPort";
+            this.buttonTakeShipFromPort.Size = new System.Drawing.Size(121, 23);
+            this.buttonTakeShipFromPort.TabIndex = 10;
+            this.buttonTakeShipFromPort.Text = "Забрать с парковки";
+            this.buttonTakeShipFromPort.UseVisualStyleBackColor = true;
+            this.buttonTakeShipFromPort.Click += new System.EventHandler(this.buttonTakeShipFromPort_Click_1);
             // 
             // maskedTextBoxPlaceShip
             // 
@@ -228,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 531);
+            this.ClientSize = new System.Drawing.Size(873, 567);
             this.Controls.Add(this.labelNamePort);
             this.Controls.Add(this.buttonDeletePort);
             this.Controls.Add(this.buttonAddPort);
@@ -260,7 +272,7 @@
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonCreateMotorShip;
         private System.Windows.Forms.GroupBox groupBoxTakeShip;
-        private System.Windows.Forms.Button buttonTakeShip;
+        private System.Windows.Forms.Button buttonTakeShipFromPort;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxPlaceShip;
         private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.Label labelCountPipes;
@@ -274,5 +286,6 @@
         private System.Windows.Forms.Button buttonAddPort;
         private System.Windows.Forms.Button buttonDeletePort;
         private System.Windows.Forms.Label labelNamePort;
+        private System.Windows.Forms.Button buttonTakeFromRemoved;
     }
 }

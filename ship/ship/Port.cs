@@ -129,6 +129,17 @@ namespace ship
             }
             return false;
         }
+        public T this[int index]
+        {
+            get
+            {
+                if(index > -1 && index < _places.Count())
+                {
+                    return _places[index];
+                }
+                return null;
+            }
+        }
         /// <summary>
         /// Метод отрисовки парковки
         /// </summary>

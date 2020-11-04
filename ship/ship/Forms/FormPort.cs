@@ -16,10 +16,12 @@ namespace ship
         /// Объект от класса-коллекции парковок
         /// </summary>
         private readonly PortCollection portCollection;
+        private readonly Stack<Ship> _removeShip;
         public FormPort()
         {
             InitializeComponent();
             portCollection = new PortCollection(pictureBoxPort.Width, pictureBoxPort.Height);
+            _removeShip = new Stack<Ship>();
         }
         /// <summary>
         /// Заполнение listBoxLevels
@@ -145,21 +147,18 @@ namespace ship
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonTakeShip_Click(object sender, EventArgs e)
+        private void buttonTakeShipFromPort_Click_1(object sender, EventArgs e)
         {
             if (listBoxPorts.SelectedIndex > -1 && maskedTextBoxPlaceShip.Text != "")
             {
                 var ship = portCollection[listBoxPorts.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxPlaceShip.Text);
                 if (ship != null)
                 {
-                    FormShip form = new FormShip();
-                    form.SetShip(ship);
-                    form.ShowDialog();
+                    _removeShip.Push(ship);
                 }
                 Draw();
             }
         }
-
         private void buttonAddPort_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
@@ -171,7 +170,6 @@ namespace ship
             portCollection.AddPort(textBoxNewLevelName.Text);
             ReloadLevels();
         }
-
         private void buttonDeletePort_Click(object sender, EventArgs e)
         {
             if (listBoxPorts.SelectedIndex > -1)
@@ -180,12 +178,28 @@ namespace ship
                 {
                     portCollection.DelPort(textBoxNewLevelName.Text);
                     ReloadLevels();
+                    if(listBoxPorts.Items.Count <= 0)
+                    {
+                        pictureBoxPort.Image = null;
+                    }
                 }
             }
         }
         private void listBoxPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+        private void buttonTakeFromRemoved_Click(object sender, EventArgs e)
+        {
+            if (_removeShip.Count > 0)
+            {
+                if (_removeShip.Count > 0)
+                {
+                    FormShip form = new FormShip();
+                    form.SetShip((Ship)_removeShip.Pop());
+                    form.ShowDialog();
+                }
+            }
         }
     }
 }

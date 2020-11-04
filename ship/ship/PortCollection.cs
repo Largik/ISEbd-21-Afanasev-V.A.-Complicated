@@ -54,6 +54,17 @@ namespace ship
                 }
                 return null;
             }
-        }
+       }
+       public Ship this[string PortIndex, int placeIndex]
+       {
+            get
+            {
+                if (Keys.Contains(PortIndex))
+                {
+                    return portStages[PortIndex][placeIndex];
+                }
+                return null;
+            }
+       }
     }
 }
