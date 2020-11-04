@@ -38,25 +38,14 @@ namespace ship
         /// </summary>
         public Color MainColor { protected set; get; }
         /// <summary>
-        /// Дополнительный цвет
-        /// </summary>
-        public Color DopColor { protected set; get; }
-        /// <summary>
         /// Установка позиции корабля
         /// </summary>
         /// <param name="x">Координата X</param>
         /// <param name="y">Координата Y</param>
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
-        public void SetPosition(int x, int y, int width, int height)
-        {
-            _pictureWidth = width;
-            _pictureHeight = height;
-            _startPosX = x;
-            _startPosY = y;
-        }
+        public abstract void SetPosition(int x, int y, int width, int height);
         public abstract void DrawTransport(Graphics g);
         public abstract void MoveTransport(Direction direction);
-
     }
 }

@@ -12,6 +12,10 @@ namespace ship
         private CountCabin cab;
         private Pipes pips;
         /// <summary>
+        /// Дополнительный цвет
+        /// </summary>
+        public Color DopColor { protected set; get; }
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -25,7 +29,7 @@ namespace ship
         /// <param name="dopColor">Дополнительный цвет</param>
         public MotorShip(int maxSpeed, float weight, int pipe, int fCabin, int cabin, Color mainColor,
             Color dopColor) :
-            base(maxSpeed, weight, mainColor, 120, 58)
+            base(maxSpeed, weight, mainColor, dopColor, 120, 58)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -47,17 +51,7 @@ namespace ship
             //Brush brush = new SolidBrush(MainColor);
             SolidBrush brWh = new SolidBrush(Color.White);
             base.DrawTransport(g);
-            Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
-            Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
-            Point line3 = new Point((int)_startPosX + 118, (int)_startPosY + 14);
-            Point line4 = new Point((int)_startPosX + 8, (int)_startPosY + 16);
-            Point line5 = new Point((int)_startPosX + 66, (int)_startPosY + 20);
-            Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
-            Point[] linePoints1 = { line1, line2, line3 };
-            Point[] linePoints2 = { line4, line5, line6 };
-
-            g.DrawCurve(pen, linePoints1);
-            g.DrawCurve(pen, linePoints2);
+            
             //якорь   
             g.FillEllipse(brWh, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
             g.DrawEllipse(pen, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace ship
 {
-    interface ITransport
+    public interface ITransport
     {
         /// <summary>
         /// Установка позиции

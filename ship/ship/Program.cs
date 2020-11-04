@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace ship
 {
@@ -16,7 +17,10 @@ namespace ship
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormShip());
+            Application.Run(new FormPort());
+
+            Console.WriteLine("Hello");
         }
+        
     }
 }

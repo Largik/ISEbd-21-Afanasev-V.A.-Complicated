@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ship
 {
@@ -16,23 +18,20 @@ namespace ship
         /// <summary>
         /// Высота отрисовки корабля
         /// </summary>
-        protected readonly int shipHeight = 58;
-        /// <summary>
-        /// Высота окна отрисовки
-        /// </summary>
-        private int _maxHeight;
+        protected readonly int shipHeight = 100;
+        private readonly Color DopColor;
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
         /// <param name="weight">Вес корабля</param>
         /// <param name="mainColor">Основной цвет</param>
-        public DefaultShip(int maxSpeed, float weight, Color mainColor, Color dopColor)
+        public DefaultShip(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
-            DopColor = dopColor;
+            DopColor = Color.Green;
         }
         /// <summary>
         /// Конструкторс изменением размеров машины
@@ -42,15 +41,29 @@ namespace ship
         /// <param name="mainColor">Основной цвет</param>
         /// <param name="shipWidth">Ширина отрисовки корабля</param>
         /// <param name="shipHeight">Высота отрисовки корабля</param>
-        protected DefaultShip(int maxSpeed, float weight, Color mainColor, int shipWidth, int
+        protected DefaultShip(int maxSpeed, float weight, Color mainColor, Color dopColor, int shipWidth, int
        shipHeight)
         {
-            _maxHeight = 45;
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+            DopColor = dopColor;
             this.shipWidth = shipWidth;
             this.shipHeight = shipHeight;
+        }
+        /// <summary>
+        /// Установка позиции
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
+        /// <param name="width">Ширина картинки</param>
+        /// <param name="height">Высота картинки</param>
+        public override void SetPosition(int x, int y, int width, int height)
+        {
+            _startPosX = x;
+            _startPosY = y;
+            _pictureWidth = width;
+            _pictureHeight = height;
         }
         /// <summary>
         /// Изменение направления пермещения
@@ -77,8 +90,7 @@ namespace ship
                     break;
                 //вверх
                 case Direction.Up:
-
-                    if (_startPosY - step > _maxHeight)
+                    if (_startPosY - shipHeight - step >= 0)
                     {
                         _startPosY -= step;
                     }
@@ -114,6 +126,17 @@ namespace ship
             g.FillPolygon(brush, PlateForm1);
             g.FillPolygon(brush, PlateForm2);
             g.FillPolygon(brush, FillPlate);
+            Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
+            Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
+            Point line3 = new Point((int)_startPosX + 118, (int)_startPosY + 14);
+            Point line4 = new Point((int)_startPosX + 8, (int)_startPosY + 16);
+            Point line5 = new Point((int)_startPosX + 66, (int)_startPosY + 20);
+            Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
+            Point[] linePoints1 = { line1, line2, line3 };
+            Point[] linePoints2 = { line4, line5, line6 };
+
+            g.DrawCurve(pen, linePoints1);
+            g.DrawCurve(pen, linePoints2);
             //якорь
             g.FillEllipse(brWh, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
             g.DrawEllipse(pen, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
@@ -145,6 +168,8 @@ namespace ship
             g.FillEllipse(brWh, (int)_startPosX + 42, (int)_startPosY - 10, 8, 8);
             g.DrawEllipse(pen, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
             g.FillEllipse(brWh, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
+            g.DrawEllipse(pen, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
+            g.FillEllipse(brWh, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
         }
     }
 }
