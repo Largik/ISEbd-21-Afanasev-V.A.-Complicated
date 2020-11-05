@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DopForMotorShip\CountCabin.cs" />
-    <Compile Include="AbstractClasses\DopDetails.cs" />
     <Compile Include="DefaultShip.cs" />
+    <Compile Include="DopForMotorShip\PipeRectangle.cs" />
+    <Compile Include="DopForMotorShip\PipeTriangle.cs" />
     <Compile Include="Enums\Direction.cs" />
     <Compile Include="FormShip.cs">
       <SubType>Form</SubType>
@@ -59,7 +59,7 @@
     <Compile Include="Interfaces\IDetails.cs" />
     <Compile Include="Interfaces\ITransport.cs" />
     <Compile Include="MotorShip.cs" />
-    <Compile Include="DopForMotorShip\Pipes.cs" />
+    <Compile Include="DopForMotorShip\PipesDefault.cs" />
     <Compile Include="Enums\DetailsEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

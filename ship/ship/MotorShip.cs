@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ship.DopForMotorShip;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,8 +10,7 @@ namespace ship
 {
     public class MotorShip : DefaultShip
     {
-        private CountCabin cab;
-        private Pipes pips;
+        private IDetails details;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -23,7 +23,7 @@ namespace ship
         /// <param name="pipe">Наличие труб</param>
         /// <param name="mainColor">Основной цвет корабля</param>
         /// <param name="dopColor">Дополнительный цвет</param>
-        public MotorShip(int maxSpeed, float weight, int pipe, int fCabin, int cabin, Color mainColor,
+        public MotorShip(int maxSpeed, float weight, int pipe, int fPipes,  Color mainColor,
             Color dopColor) :
             base(maxSpeed, weight, mainColor, 120, 58)
         {
@@ -31,11 +31,7 @@ namespace ship
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
-            cab = new CountCabin();
-            cab.countCabin = cabin;
-            cab.SetForm(fCabin);
-            pips = new Pipes();
-            pips.CountPipe = pipe;
+            details = GetDetails(fPipes, pipe);
         }
         /// <summary>
         /// Отрисовка корабля
@@ -46,6 +42,7 @@ namespace ship
             Pen pen = new Pen(Color.Black);
             //Brush brush = new SolidBrush(MainColor);
             SolidBrush brWh = new SolidBrush(Color.White);
+            details?.DrawDetails(g, _startPosX, _startPosY);
             base.DrawTransport(g);
             Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
             Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
@@ -55,7 +52,6 @@ namespace ship
             Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
             Point[] linePoints1 = { line1, line2, line3 };
             Point[] linePoints2 = { line4, line5, line6 };
-
             g.DrawCurve(pen, linePoints1);
             g.DrawCurve(pen, linePoints2);
             //якорь   
@@ -72,10 +68,20 @@ namespace ship
             g.DrawRectangle(pen, (int)_startPosX + 33, (int)_startPosY + 20, 3, 10);
             g.FillRectangle(brWh, (int)_startPosX + 27, (int)_startPosY + 26, 14, 2);
             g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);
-            cab.SetData((int)_startPosX, (int)_startPosY);
-            cab.SetDetails(g);
-            pips.SetData((int)_startPosX, (int)_startPosY);
-            pips.SetDetails(g);
+            
+        }
+        private IDetails GetDetails(int formPipe, int countPipe)
+        {
+            switch (formPipe)
+            {
+                case 1:
+                    return new PipesDefault(countPipe);
+                case 2:
+                    return new PipeRectangle(countPipe);
+                case 3:
+                    return new PipeTriangle(countPipe);
+            }
+            return null;
         }
     }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pictureBoxShip = new System.Windows.Forms.PictureBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
@@ -37,10 +36,8 @@
             this.comboBoxPipes = new System.Windows.Forms.ComboBox();
             this.buttonCreateMotorShip = new System.Windows.Forms.Button();
             this.labelCountPipes = new System.Windows.Forms.Label();
-            this.comboBoxFormCabin = new System.Windows.Forms.ComboBox();
-            this.comboBoxCabin = new System.Windows.Forms.ComboBox();
-            this.labelCountLine = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxFormPipes = new System.Windows.Forms.ComboBox();
+            this.labelCountFormPipes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,16 +49,6 @@
             this.pictureBoxShip.Size = new System.Drawing.Size(884, 461);
             this.pictureBoxShip.TabIndex = 0;
             this.pictureBoxShip.TabStop = false;
-            // 
-            // buttonCreate
-            // 
-            this.buttonCreate.Location = new System.Drawing.Point(761, 12);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(88, 45);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать корабль";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
             // buttonRight
             // 
@@ -125,7 +112,7 @@
             // 
             // buttonCreateMotorShip
             // 
-            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 202);
+            this.buttonCreateMotorShip.Location = new System.Drawing.Point(761, 162);
             this.buttonCreateMotorShip.Name = "buttonCreateMotorShip";
             this.buttonCreateMotorShip.Size = new System.Drawing.Size(88, 36);
             this.buttonCreateMotorShip.TabIndex = 7;
@@ -142,56 +129,34 @@
             this.labelCountPipes.TabIndex = 8;
             this.labelCountPipes.Text = "Количество труб";
             // 
-            // comboBoxFormCabin
+            // comboBoxFormPipes
             // 
-            this.comboBoxFormCabin.FormattingEnabled = true;
-            this.comboBoxFormCabin.Items.AddRange(new object[] {
-            "Круглая",
-            "Квадратная"});
-            this.comboBoxFormCabin.Location = new System.Drawing.Point(761, 135);
-            this.comboBoxFormCabin.Name = "comboBoxFormCabin";
-            this.comboBoxFormCabin.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxFormCabin.TabIndex = 9;
+            this.comboBoxFormPipes.FormattingEnabled = true;
+            this.comboBoxFormPipes.Items.AddRange(new object[] {
+            "Обычная",
+            "Квадратная",
+            "Треугольная"});
+            this.comboBoxFormPipes.Location = new System.Drawing.Point(761, 135);
+            this.comboBoxFormPipes.Name = "comboBoxFormPipes";
+            this.comboBoxFormPipes.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxFormPipes.TabIndex = 9;
             // 
-            // comboBoxCabin
+            // labelCountFormPipes
             // 
-            this.comboBoxCabin.FormattingEnabled = true;
-            this.comboBoxCabin.Items.AddRange(new object[] {
-            "3",
-            "4",
-            "5"});
-            this.comboBoxCabin.Location = new System.Drawing.Point(761, 175);
-            this.comboBoxCabin.Name = "comboBoxCabin";
-            this.comboBoxCabin.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxCabin.TabIndex = 10;
-            // 
-            // labelCountLine
-            // 
-            this.labelCountLine.AutoSize = true;
-            this.labelCountLine.Location = new System.Drawing.Point(747, 119);
-            this.labelCountLine.Name = "labelCountLine";
-            this.labelCountLine.Size = new System.Drawing.Size(121, 13);
-            this.labelCountLine.TabIndex = 11;
-            this.labelCountLine.Text = "Выберите форму кают";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(755, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Количество кают";
+            this.labelCountFormPipes.AutoSize = true;
+            this.labelCountFormPipes.Location = new System.Drawing.Point(747, 119);
+            this.labelCountFormPipes.Name = "labelCountFormPipes";
+            this.labelCountFormPipes.Size = new System.Drawing.Size(118, 13);
+            this.labelCountFormPipes.TabIndex = 11;
+            this.labelCountFormPipes.Text = "Выберите форму труб";
             // 
             // FormShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelCountLine);
-            this.Controls.Add(this.comboBoxCabin);
-            this.Controls.Add(this.comboBoxFormCabin);
+            this.Controls.Add(this.labelCountFormPipes);
+            this.Controls.Add(this.comboBoxFormPipes);
             this.Controls.Add(this.labelCountPipes);
             this.Controls.Add(this.buttonCreateMotorShip);
             this.Controls.Add(this.comboBoxPipes);
@@ -199,7 +164,6 @@
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
-            this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.pictureBoxShip);
             this.Name = "FormShip";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -213,7 +177,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxShip;
-        private System.Windows.Forms.Button buttonCreate;
         protected System.Windows.Forms.Button buttonUp;
         protected System.Windows.Forms.Button buttonRight;
         protected System.Windows.Forms.Button buttonDown;
@@ -221,10 +184,8 @@
         private System.Windows.Forms.ComboBox comboBoxPipes;
         private System.Windows.Forms.Button buttonCreateMotorShip;
         private System.Windows.Forms.Label labelCountPipes;
-        private System.Windows.Forms.ComboBox comboBoxFormCabin;
-        private System.Windows.Forms.ComboBox comboBoxCabin;
-        private System.Windows.Forms.Label labelCountLine;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxFormPipes;
+        private System.Windows.Forms.Label labelCountFormPipes;
     }
 }
 
