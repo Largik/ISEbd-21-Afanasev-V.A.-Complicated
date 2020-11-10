@@ -13,7 +13,6 @@ namespace ship
     public partial class FormShip : Form
     {
         private Ship ship;
-
         /// <summary>
         /// Конструктор
         /// </summary>
