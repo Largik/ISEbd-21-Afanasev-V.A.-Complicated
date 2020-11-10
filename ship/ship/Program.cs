@@ -18,8 +18,6 @@ namespace ship
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormPort());
-
-            Console.WriteLine("Hello");
         }
         
     }
