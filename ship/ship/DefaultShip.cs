@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ship
 {
-    class Ship
+    class DefaultShip
     {
         /// <summary>
         /// Левая координата отрисовки корабля
@@ -81,7 +81,7 @@ namespace ship
         /// <param name="mainColor">Основной цвет корабля</param>
         /// <param name="dopColor">Дополнительный цвет</param>
 
-        public Ship(int maxSpeed, float weight, int countPipe, Color mainColor, Color dopColor, bool cabin, bool line)
+        public DefaultShip(int maxSpeed, float weight, int countPipe, Color mainColor, Color dopColor, bool cabin, bool line)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -109,8 +109,7 @@ namespace ship
             {
                 _startPosX = x;
                 _startPosY = y + 45;
-            }
-            
+            }   
         }
         /// <summary>
         /// Изменение направления пермещения

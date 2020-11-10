@@ -13,7 +13,7 @@ namespace ship
     public partial class FormShip : Form
 
     {
-        private Ship ship;
+        private DefaultShip ship;
 
         /// <summary>
         /// Конструктор
@@ -43,7 +43,7 @@ namespace ship
             Random rnd = new Random();
             if (comboBoxPipes.SelectedIndex > -1)
             {
-                ship = new Ship(rnd.Next(1000, 3000), rnd.Next(10000, 50000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Color.Red, Color.Blue, true, true);
+                ship = new DefaultShip(rnd.Next(1000, 3000), rnd.Next(10000, 50000), Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), Color.Red, Color.Blue, true, true);
                 ship.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxShip.Width, pictureBoxShip.Height);
                 Draw();        
             }
