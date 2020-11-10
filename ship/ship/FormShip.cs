@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace ship
 {
     public partial class FormShip : Form
+
     {
         private Ship ship;
 
