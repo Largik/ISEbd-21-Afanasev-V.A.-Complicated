@@ -67,8 +67,7 @@ namespace ship
             g.DrawRectangle(pen, (int)_startPosX + 28, (int)_startPosY + 25, 12, 3);
             g.DrawRectangle(pen, (int)_startPosX + 33, (int)_startPosY + 20, 3, 10);
             g.FillRectangle(brWh, (int)_startPosX + 27, (int)_startPosY + 26, 14, 2);
-            g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);
-            
+            g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);           
         }
         private IDetails GetDetails(int formPipe, int countPipe)
         {

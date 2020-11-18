@@ -32,7 +32,6 @@ namespace ship
                     break;
             }
         }
-
         public void Draw1Pipe(Graphics g, float startX, float startY)
         {
             //2 труба

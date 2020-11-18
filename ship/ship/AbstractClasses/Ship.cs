@@ -57,6 +57,5 @@ namespace ship
         }
         public abstract void DrawTransport(Graphics g);
         public abstract void MoveTransport(Direction direction);
-
     }
 }

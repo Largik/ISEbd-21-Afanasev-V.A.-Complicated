@@ -38,6 +38,7 @@
             this.labelCountPipes = new System.Windows.Forms.Label();
             this.comboBoxFormPipes = new System.Windows.Forms.ComboBox();
             this.labelCountFormPipes = new System.Windows.Forms.Label();
+            this.buttonCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShip)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,11 +151,22 @@
             this.labelCountFormPipes.TabIndex = 11;
             this.labelCountFormPipes.Text = "Выберите форму труб";
             // 
+            // buttonCreate
+            // 
+            this.buttonCreate.Location = new System.Drawing.Point(761, 26);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(88, 36);
+            this.buttonCreate.TabIndex = 12;
+            this.buttonCreate.Text = "Создать корабль";
+            this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
             // FormShip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.labelCountFormPipes);
             this.Controls.Add(this.comboBoxFormPipes);
             this.Controls.Add(this.labelCountPipes);
@@ -186,6 +198,7 @@
         private System.Windows.Forms.Label labelCountPipes;
         private System.Windows.Forms.ComboBox comboBoxFormPipes;
         private System.Windows.Forms.Label labelCountFormPipes;
+        private System.Windows.Forms.Button buttonCreate;
     }
 }
 
