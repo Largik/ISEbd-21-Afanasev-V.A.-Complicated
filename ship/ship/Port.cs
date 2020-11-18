@@ -42,14 +42,6 @@ namespace ship
         /// </summary>
         private readonly int _column;
         /// <summary>
-        /// Координата X для следующего
-        /// </summary>
-        public int XShip { get; private set; } = 5;
-        /// <summary>
-        /// Координата Y для следующего
-        /// </summary>
-        public int YShip { get; private set; } = 50;
-        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="picWidth">Размер порта - ширина</param>

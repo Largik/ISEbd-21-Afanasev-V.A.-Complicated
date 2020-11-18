@@ -9,8 +9,9 @@ namespace ship
 {
     public class MotorShip : DefaultShip
     {
-        private CountCabin cab;
-        private Pipes pips;
+        private IDetails details;
+        public bool Cabin { private set; get; }
+        public bool Line { private set; get; }
         /// <summary>
         /// Дополнительный цвет
         /// </summary>
@@ -27,19 +28,19 @@ namespace ship
         /// <param name="pipe">Наличие труб</param>
         /// <param name="mainColor">Основной цвет корабля</param>
         /// <param name="dopColor">Дополнительный цвет</param>
-        public MotorShip(int maxSpeed, float weight, int pipe, int fCabin, int cabin, Color mainColor,
-            Color dopColor) :
-            base(maxSpeed, weight, mainColor, dopColor, 120, 58)
+        public MotorShip(int maxSpeed, float weight, Color mainColor,
+            Color dopColor, bool cabin, bool line) :
+            base(maxSpeed, weight, mainColor, 120, 58)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
-            MainColor = mainColor;
             DopColor = dopColor;
-            cab = new CountCabin();
-            cab.countCabin = cabin;
-            cab.SetForm(fCabin);
-            pips = new Pipes();
-            pips.CountPipe = pipe;
+            Cabin = cabin;
+            Line = line;    
+        }
+        public void SetPipeForm(IDetails idetails)
+        {
+            details = idetails;
         }
         /// <summary>
         /// Отрисовка корабля
@@ -48,10 +49,35 @@ namespace ship
         public override void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
-            //Brush brush = new SolidBrush(MainColor);
             SolidBrush brWh = new SolidBrush(Color.White);
+            details?.DrawDetails(g, _startPosX, _startPosY);
             base.DrawTransport(g);
-            
+            if (Line)
+            {
+                Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
+                Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
+                Point line3 = new Point((int)_startPosX + 118, (int)_startPosY + 14);
+                Point line4 = new Point((int)_startPosX + 8, (int)_startPosY + 16);
+                Point line5 = new Point((int)_startPosX + 66, (int)_startPosY + 20);
+                Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
+                Point[] linePoints1 = { line1, line2, line3 };
+                Point[] linePoints2 = { line4, line5, line6 };
+                g.DrawCurve(pen, linePoints1);
+                g.DrawCurve(pen, linePoints2);
+            }
+            if (Cabin)
+            {
+                g.DrawEllipse(pen, (int)_startPosX + 23, (int)_startPosY - 10, 8, 8);
+                g.FillEllipse(brWh, (int)_startPosX + 23, (int)_startPosY - 10, 8, 8);
+                g.DrawEllipse(pen, (int)_startPosX + 42, (int)_startPosY - 10, 8, 8);
+                g.FillEllipse(brWh, (int)_startPosX + 42, (int)_startPosY - 10, 8, 8);
+                g.DrawEllipse(pen, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
+                g.FillEllipse(brWh, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
+                g.DrawEllipse(pen, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
+                g.FillEllipse(brWh, (int)_startPosX + 80, (int)_startPosY - 8, 6, 6);
+                g.DrawEllipse(pen, (int)_startPosX + 99, (int)_startPosY - 7, 5, 5);
+                g.FillEllipse(brWh, (int)_startPosX + 99, (int)_startPosY - 7, 5, 5);
+            }
             //якорь   
             g.FillEllipse(brWh, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
             g.DrawEllipse(pen, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
@@ -65,11 +91,11 @@ namespace ship
             g.DrawRectangle(pen, (int)_startPosX + 28, (int)_startPosY + 25, 12, 3);
             g.DrawRectangle(pen, (int)_startPosX + 33, (int)_startPosY + 20, 3, 10);
             g.FillRectangle(brWh, (int)_startPosX + 27, (int)_startPosY + 26, 14, 2);
-            g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);
-            cab.SetData((int)_startPosX, (int)_startPosY);
-            cab.SetDetails(g);
-            pips.SetData((int)_startPosX, (int)_startPosY);
-            pips.SetDetails(g);
+            g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);          
+        }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
         }
     }
 }

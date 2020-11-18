@@ -8,7 +8,7 @@ namespace ship
 {
     class PortCollection
     {
-        readonly Dictionary<string, Port<Ship, DopDetails>> portStages;
+        readonly Dictionary<string, Port<Ship, IDetails>> portStages;
         public List<string> Keys => portStages.Keys.ToList();
         /// <summary>
         /// Ширина окна отрисовки
@@ -25,7 +25,7 @@ namespace ship
         /// <param name="pictureHeight"></param>
         public PortCollection(int pictureWidth, int pictureHeight)
         {
-            portStages = new Dictionary<string, Port<Ship, DopDetails>>();
+            portStages = new Dictionary<string, Port<Ship, IDetails>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
         }
@@ -35,7 +35,7 @@ namespace ship
             {
                 return;
             }
-            portStages.Add(name, new Port<Ship, DopDetails>(pictureWidth, pictureHeight));
+            portStages.Add(name, new Port<Ship, IDetails>(pictureWidth, pictureHeight));
         }
          public void DelPort(string name)
         {
@@ -44,7 +44,7 @@ namespace ship
                 portStages.Remove(name);
             }
         }
-       public Port<Ship, DopDetails> this[string ind]
+       public Port<Ship, IDetails> this[string ind]
         {
             get
             {

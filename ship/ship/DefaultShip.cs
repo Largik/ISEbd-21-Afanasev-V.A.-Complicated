@@ -19,7 +19,6 @@ namespace ship
         /// Высота отрисовки корабля
         /// </summary>
         protected readonly int shipHeight = 100;
-        private readonly Color DopColor;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -31,7 +30,6 @@ namespace ship
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
-            DopColor = Color.Green;
         }
         /// <summary>
         /// Конструкторс изменением размеров машины
@@ -41,13 +39,12 @@ namespace ship
         /// <param name="mainColor">Основной цвет</param>
         /// <param name="shipWidth">Ширина отрисовки корабля</param>
         /// <param name="shipHeight">Высота отрисовки корабля</param>
-        protected DefaultShip(int maxSpeed, float weight, Color mainColor, Color dopColor, int shipWidth, int
+        protected DefaultShip(int maxSpeed, float weight, Color mainColor, int shipWidth, int
        shipHeight)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
-            DopColor = dopColor;
             this.shipWidth = shipWidth;
             this.shipHeight = shipHeight;
         }
@@ -152,7 +149,7 @@ namespace ship
             g.FillRectangle(brWh, (int)_startPosX + 27, (int)_startPosY + 26, 14, 2);
             g.FillRectangle(brWh, (int)_startPosX + 34, (int)_startPosY + 21, 2, 10);
             //каюты
-            brush = new SolidBrush(DopColor);
+            brush = new SolidBrush(Color.Gray);
             Point CabinPoint1 = new Point((int)_startPosX + 10, (int)_startPosY);
             Point FillCabinPoint1 = new Point((int)_startPosX + 18, (int)_startPosY + 1);
             Point CabinPoint2 = new Point((int)_startPosX + 26, (int)_startPosY - 14);

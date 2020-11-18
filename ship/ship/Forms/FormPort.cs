@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ship
@@ -57,91 +52,59 @@ namespace ship
             }
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать корабль"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonCreate_Click(object sender, EventArgs e)
-        {
-            if (listBoxPorts.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var ship = new DefaultShip(100, 1000, dialog.Color);
-                    if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Порт переполнен");
-                    }
-                }
-            }
-        }
-        /// <summary>
         /// Обработка нажатия кнопки "Припарковать теплоход"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonCreateMotorShip_Click(object sender, EventArgs e)
-        {
-            if (listBoxPorts.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        Random rnd = new Random();
-                        if (comboBoxPipes.SelectedIndex > -1)
-                        {
-                            if (comboBoxFormCabin.SelectedIndex > -1)
-                            {
-                                int fCabin;
-                                string text = comboBoxFormCabin.Text;
-                                if (text == "Квадратная")
-                                {
-                                    fCabin = 2;
-                                }
-                                else
-                                {
-                                    fCabin = 1;
-                                }
+        //private void buttonCreateMotorShip_Click(object sender, EventArgs e)
+        //{
+        //    if (listBoxPorts.SelectedIndex > -1)
+        //    {
+        //        ColorDialog dialog = new ColorDialog();
+        //        if (dialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            ColorDialog dialogDop = new ColorDialog();
+        //            if (dialogDop.ShowDialog() == DialogResult.OK)
+        //            {
+        //                Random rnd = new Random();
+        //                if (comboBoxPipes.SelectedIndex > -1)
+        //                {
+        //                    if (comboBoxFormPipes.SelectedIndex > -1)
+        //                    {
+        //                        int fPipes = 1;
+        //                        string fCab = comboBoxFormPipes.SelectedItem.ToString();
+        //                        if (fCab == "Квадратная")
+        //                        {
+        //                            fPipes = 2;
+        //                        }
+        //                        else if (fCab == "Треугольная")
+        //                        {
+        //                            fPipes = 3;
+        //                        }
+        //                        var ship = new MotorShip(100, 1000, Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fPipes, dialog.Color, dialogDop.Color);
+        //                        if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
+        //                        {
+        //                            Draw();
+        //                        }
+        //                        else
+        //                        {
+        //                            MessageBox.Show("Порт переполнен");
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        MessageBox.Show("Укажите форму кают");
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show("Укажите количество труб");
+        //                }
 
-                                if (comboBoxCabin.SelectedIndex > -1)
-                                {
-                                    var ship = new MotorShip(100, 1000, Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fCabin, Convert.ToInt32(comboBoxCabin.SelectedItem.ToString()), dialog.Color, dialogDop.Color);
-                                    if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
-                                    {
-                                        Draw();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Порт переполнен");
-                                    }
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Укажите количество кают");
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Укажите форму кают");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Укажите количество труб");
-                        }
-
-                    }
-                }
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //}
         /// <summary>
         /// Обработка нажатия кнопки "забрать"
         /// </summary>
@@ -178,7 +141,7 @@ namespace ship
                 {
                     portCollection.DelPort(textBoxNewLevelName.Text);
                     ReloadLevels();
-                    if(listBoxPorts.Items.Count <= 0)
+                    if (listBoxPorts.Items.Count <= 0)
                     {
                         pictureBoxPort.Image = null;
                     }
@@ -198,6 +161,26 @@ namespace ship
                     FormShip form = new FormShip();
                     form.SetShip((Ship)_removeShip.Pop());
                     form.ShowDialog();
+                }
+            }
+        }
+        private void buttonSetShip_Click(object sender, EventArgs e)
+        {
+            var formCarConfig = new FormShipConfig();
+            formCarConfig.AddEvent(AddShip);
+            formCarConfig.Show();
+        }
+        private void AddShip(Ship ship)
+        {
+            if (ship != null && listBoxPorts.SelectedIndex > -1)
+            {
+                if ((portCollection[listBoxPorts.SelectedItem.ToString()]) + ship)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Корабль не удалось поставить");
                 }
             }
         }

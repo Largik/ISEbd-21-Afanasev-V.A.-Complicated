@@ -45,6 +45,10 @@ namespace ship
         /// <param name="width">Ширина картинки</param>
         /// <param name="height">Высота картинки</param>
         public abstract void SetPosition(int x, int y, int width, int height);
+        public void SetMainColor(Color color)
+        {
+            MainColor = color;
+        }
         public abstract void DrawTransport(Graphics g);
         public abstract void MoveTransport(Direction direction);
     }

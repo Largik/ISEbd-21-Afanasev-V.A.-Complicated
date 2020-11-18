@@ -7,45 +7,31 @@ using System.Threading.Tasks;
 
 namespace ship
 {
-    class Pipes : DopDetails
+    class PipesDefault : IDetails
     {
         private DetailsEnum _countPipe;
-        public int CountPipe
+        private Color pipeColor;
+        public Pen pen = new Pen(Color.Black);
+        public PipesDefault(int count, Color dopColor)
         {
-            set
-            {
-                if (value < 1)
-                {
-                    _countPipe = DetailsEnum.one;
-                }
-                if (value == 2)
-                {
-                    _countPipe = DetailsEnum.two;
-                }
-                if (value > 3)
-                {
-                    _countPipe = DetailsEnum.three;
-                }
-                else
-                {
-                    _countPipe = (DetailsEnum)value;
-                }
-            }
+            Count = count;
+            pipeColor = dopColor;
         }
-        public override void SetDetails(Graphics g)
+        public int Count { set => _countPipe = (DetailsEnum)value; }
+        public void DrawDetails(Graphics g, float _startX, float _startY)
         {
-            if (_countPipe == DetailsEnum.one)
+            switch (_countPipe)
             {
-                Draw1Pipe(g, _startX, _startY);
-            }
-            if (_countPipe == DetailsEnum.two)
-            {
-                Draw2Pipe(g, _startX, _startY);
-            }
-            if (_countPipe == DetailsEnum.three)
-            {
-                Draw1Pipe(g, _startX, _startY);
-                Draw2Pipe(g, _startX, _startY);
+                case DetailsEnum.one:
+                    Draw1Pipe(g, _startX, _startY);
+                    break;
+                case DetailsEnum.two:
+                    Draw2Pipe(g, _startX, _startY);
+                    break;
+                case DetailsEnum.three:
+                    Draw1Pipe(g, _startX, _startY);
+                    Draw2Pipe(g, _startX, _startY);
+                    break;
             }
         }
         public void Draw1Pipe(Graphics g, float startX, float startY)

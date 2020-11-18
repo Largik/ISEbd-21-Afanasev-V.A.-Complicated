@@ -7,8 +7,9 @@ using System.Drawing;
 
 namespace ship
 {
-    interface IDetails
+    public interface IDetails
     {
-        void SetDetails(Graphics g);
+        int Count { set; }
+        void DrawDetails(Graphics g, float _startX, float _startY);
     }
 }
