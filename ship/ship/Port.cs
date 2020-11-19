@@ -100,37 +100,25 @@ namespace ship
                 return null;
             }
         }
-        public static bool operator >(Port<T, A> Port, int count)
+        private int CheckPlace()
         {
             int placeCount = 0;
-            for (int i = 0; i < Port._places.Length; i++)
+            for (int i = 0; i < _places.Length; i++)
             {
-                if (Port._places[i] != null)
+                if (_places[i] != null)
                 {
                     placeCount++;
                 }
             }
-            if (placeCount > count)
-            {
-                return true;
-            }
-            return false;
+            return placeCount;
+        }
+        public static bool operator >(Port<T, A> Port, int count)
+        {
+            return Port.CheckPlace() > count;
         }
         public static bool operator <(Port<T, A> Port, int count)
         {
-            int placeCount = 0;
-            for (int i = 0; i < Port._places.Length; i++)
-            {
-                if (Port._places[i] != null)
-                {
-                    placeCount++;
-                }
-            }
-            if (placeCount < count)
-            {
-                return true;
-            }
-            return false;
+            return Port.CheckPlace() < count;
         }
         /// <summary>
         /// Метод отрисовки парковки
