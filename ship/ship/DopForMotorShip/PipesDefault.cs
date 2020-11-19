@@ -11,15 +11,21 @@ namespace ship
     {
         private DetailsEnum _countPipe;
         private Color pipeColor;
-        public Pen pen = new Pen(Color.Black);
+        private Pen pen = new Pen(Color.Black);
+        private SolidBrush brush;
         public PipesDefault(int count, Color dopColor)
         {
             Count = count;
             pipeColor = dopColor;
         }
+        public void SetDopColor(Color color)
+        {
+            pipeColor = color;
+        }
         public int Count { set => _countPipe = (DetailsEnum)value; }
         public void DrawDetails(Graphics g, float _startX, float _startY)
         {
+            brush = new SolidBrush(pipeColor);
             switch (_countPipe)
             {
                 case DetailsEnum.one:
@@ -36,7 +42,9 @@ namespace ship
         }
         public void Draw1Pipe(Graphics g, float startX, float startY)
         {
+            brush = new SolidBrush(pipeColor);
             //2 труба
+            
             Point pipe21 = new Point((int)startX + 67, (int)startY - 14);
             Point pipe22 = new Point((int)startX + 68, (int)startY - 36);
             Point pipe23 = new Point((int)startX + 76, (int)startY - 39);
@@ -48,6 +56,13 @@ namespace ship
             Point pipe29 = new Point((int)startX + 68, (int)startY - 26);
             Point pipe210 = new Point((int)startX + 76, (int)startY - 29);
             Point pipe211 = new Point((int)startX + 84, (int)startY - 25);
+            Point[] pipe2 = { new Point((int)startX + 67, (int)startY - 14),
+            new Point((int)startX + 68, (int)startY - 36),
+            new Point((int)startX + 76, (int)startY - 39),
+            new Point((int)startX + 84, (int)startY - 35),
+            new Point((int)startX + 84, (int)startY - 13)
+            }; 
+            g.FillPolygon(brush, pipe2);
             g.DrawLine(pen, pipe21, pipe22);
             Point[] PIPE2 = { pipe22, pipe23, pipe24 };
             Point[] PIPE22 = { pipe26, pipe27, pipe28 };
@@ -55,7 +70,7 @@ namespace ship
             g.DrawCurve(pen, PIPE2);
             g.DrawLine(pen, pipe24, pipe25);
             g.DrawCurve(pen, PIPE22);
-            g.DrawCurve(pen, PIPE23);
+            g.DrawCurve(pen, PIPE23);           
         }
         public void Draw2Pipe(Graphics g, float startX, float startY)
         {
@@ -71,6 +86,13 @@ namespace ship
             Point pipe19 = new Point((int)startX + 45, (int)startY - 29);
             Point pipe110 = new Point((int)startX + 55, (int)startY - 32);
             Point pipe111 = new Point((int)startX + 64, (int)startY - 28);
+            Point[] pipe1 = { new Point((int)startX + 44, (int)startY - 15),
+            new Point((int)startX + 45, (int)startY - 41),
+            new Point((int)startX + 55, (int)startY - 44),
+            new Point((int)startX + 64, (int)startY - 40),
+            new Point((int)startX + 64, (int)startY - 14)
+            };
+            g.FillPolygon(brush, pipe1); 
             g.DrawLine(pen, pipe11, pipe12);
             Point[] PIPE1 = { pipe12, pipe13, pipe14 };
             Point[] PIPE12 = { pipe16, pipe17, pipe18 };
@@ -91,6 +113,13 @@ namespace ship
             Point pipe39 = new Point((int)startX + 88, (int)startY - 23);
             Point pipe310 = new Point((int)startX + 95, (int)startY - 25);
             Point pipe311 = new Point((int)startX + 101, (int)startY - 22);
+            Point[] pipe3 = { new Point((int)startX + 87, (int)startY - 13),
+            new Point((int)startX + 88, (int)startY - 30),
+            new Point((int)startX + 95, (int)startY - 32),
+            new Point((int)startX + 101, (int)startY - 29),
+            new Point((int)startX + 101, (int)startY - 12)
+            };
+            g.FillPolygon(brush, pipe3);
             g.DrawLine(pen, pipe31, pipe32);
             Point[] PIPE3 = { pipe32, pipe33, pipe34 };
             Point[] PIPE32 = { pipe36, pipe37, pipe38 };

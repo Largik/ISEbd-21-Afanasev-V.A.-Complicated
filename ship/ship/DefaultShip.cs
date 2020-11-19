@@ -123,17 +123,6 @@ namespace ship
             g.FillPolygon(brush, PlateForm1);
             g.FillPolygon(brush, PlateForm2);
             g.FillPolygon(brush, FillPlate);
-            Point line1 = new Point((int)_startPosX + 4, (int)_startPosY + 10);
-            Point line2 = new Point((int)_startPosX + 66, (int)_startPosY + 14);
-            Point line3 = new Point((int)_startPosX + 118, (int)_startPosY + 14);
-            Point line4 = new Point((int)_startPosX + 8, (int)_startPosY + 16);
-            Point line5 = new Point((int)_startPosX + 66, (int)_startPosY + 20);
-            Point line6 = new Point((int)_startPosX + 116, (int)_startPosY + 20);
-            Point[] linePoints1 = { line1, line2, line3 };
-            Point[] linePoints2 = { line4, line5, line6 };
-
-            g.DrawCurve(pen, linePoints1);
-            g.DrawCurve(pen, linePoints2);
             //якорь
             g.FillEllipse(brWh, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);
             g.DrawEllipse(pen, (int)_startPosX + 27, (int)_startPosY + 10, 13, 13);

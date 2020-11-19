@@ -51,60 +51,7 @@ namespace ship
                 pictureBoxPort.Image = bmp;
             }
         }
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать теплоход"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void buttonCreateMotorShip_Click(object sender, EventArgs e)
-        //{
-        //    if (listBoxPorts.SelectedIndex > -1)
-        //    {
-        //        ColorDialog dialog = new ColorDialog();
-        //        if (dialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            ColorDialog dialogDop = new ColorDialog();
-        //            if (dialogDop.ShowDialog() == DialogResult.OK)
-        //            {
-        //                Random rnd = new Random();
-        //                if (comboBoxPipes.SelectedIndex > -1)
-        //                {
-        //                    if (comboBoxFormPipes.SelectedIndex > -1)
-        //                    {
-        //                        int fPipes = 1;
-        //                        string fCab = comboBoxFormPipes.SelectedItem.ToString();
-        //                        if (fCab == "Квадратная")
-        //                        {
-        //                            fPipes = 2;
-        //                        }
-        //                        else if (fCab == "Треугольная")
-        //                        {
-        //                            fPipes = 3;
-        //                        }
-        //                        var ship = new MotorShip(100, 1000, Convert.ToInt32(comboBoxPipes.SelectedItem.ToString()), fPipes, dialog.Color, dialogDop.Color);
-        //                        if (portCollection[listBoxPorts.SelectedItem.ToString()] + ship)
-        //                        {
-        //                            Draw();
-        //                        }
-        //                        else
-        //                        {
-        //                            MessageBox.Show("Порт переполнен");
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        MessageBox.Show("Укажите форму кают");
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show("Укажите количество труб");
-        //                }
-
-        //            }
-        //        }
-        //    }
-        //}
+        
         /// <summary>
         /// Обработка нажатия кнопки "забрать"
         /// </summary>

@@ -10,6 +10,7 @@ namespace ship
     public interface IDetails
     {
         int Count { set; }
+        void SetDopColor(Color color);
         void DrawDetails(Graphics g, float _startX, float _startY);
     }
 }

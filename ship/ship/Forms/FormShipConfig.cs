@@ -15,7 +15,7 @@ namespace ship
         Ship ship = null;
         private event Action<Ship> eventAddShip;
         private IDetails details = null;
-        private Color dopColor = Color.Black;
+        private Color dopColor = Color.Black; 
         public FormShipConfig()
         {
             InitializeComponent();
@@ -139,7 +139,7 @@ namespace ship
             if (ship is MotorShip)
             {
                 MotorShip SHip = (MotorShip)ship;
-
+                dopColor = ((Color)(e.Data.GetData(typeof(Color))));
                 SHip.SetDopColor((Color)(e.Data.GetData(typeof(Color))));
                 DrawShip();
             }

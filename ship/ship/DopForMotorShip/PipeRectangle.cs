@@ -11,7 +11,7 @@ namespace ship
     {
         private DetailsEnum _countPipe;
         private Color pipeColor;
-        public Pen pen = new Pen(Color.Black);
+        private Pen pen = new Pen(Color.Black);
         private SolidBrush brush;
         public PipeRectangle(int count, Color dopColor)
         {
@@ -51,6 +51,11 @@ namespace ship
             //труба3
             g.DrawRectangle(pen, (int)_startPosX + 92, (int)_startPosY - 30, 10, 40);
             g.FillRectangle(brush, (int)_startPosX + 92, (int)_startPosY - 30, 10, 40);
+        }
+
+        public void SetDopColor(Color color)
+        {
+            pipeColor = color;        
         }
     }
 }

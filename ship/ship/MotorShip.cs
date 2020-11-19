@@ -40,7 +40,7 @@ namespace ship
         }
         public void SetPipeForm(IDetails idetails)
         {
-            details = idetails;
+            this.details = idetails;
         }
         /// <summary>
         /// Отрисовка корабля
@@ -96,6 +96,7 @@ namespace ship
         public void SetDopColor(Color color)
         {
             DopColor = color;
+            details.SetDopColor(DopColor);
         }
     }
 }

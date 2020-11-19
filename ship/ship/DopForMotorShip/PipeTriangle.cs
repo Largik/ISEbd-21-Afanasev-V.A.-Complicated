@@ -18,6 +18,10 @@ namespace ship
             Count = count;
             pipeColor = dopColor;
         }
+        public void SetDopColor(Color color)
+        {
+            pipeColor = color;
+        }
         public int Count { set => _countPipe = (DetailsEnum)value; }
         public void DrawDetails(Graphics g, float _startX, float _startY)
         {            
