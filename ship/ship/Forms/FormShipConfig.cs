@@ -139,9 +139,12 @@ namespace ship
             if (ship is MotorShip)
             {
                 MotorShip SHip = (MotorShip)ship;
-                dopColor = ((Color)(e.Data.GetData(typeof(Color))));
-                SHip.SetDopColor((Color)(e.Data.GetData(typeof(Color))));
-                DrawShip();
+                if(details != null)
+                {
+                    dopColor = ((Color)(e.Data.GetData(typeof(Color))));
+                    SHip.SetDopColor((Color)(e.Data.GetData(typeof(Color))));
+                    DrawShip();
+                }
             }
         }
         private void panelColor_MouseDown(object sender, MouseEventArgs e)
