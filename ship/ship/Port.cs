@@ -89,37 +89,25 @@ namespace ship
             Port._places.RemoveAt(index);
             return ship;
         }
-        public static bool operator >(Port<T, A> Port, int count)
+        private int CheckPlace()
         {
             int placeCount = 0;
-            for (int i = 0; i < Port._places.Count; i++)
+            for (int i = 0; i < _places.Count; i++)
             {
-                if (Port._places[i] != null)
+                if (_places[i] != null)
                 {
                     placeCount++;
                 }
             }
-            if (placeCount > count)
-            {
-                return true;
-            }
-            return false;
+            return placeCount;
+        }
+        public static bool operator >(Port<T, A> Port, int count)
+        {
+            return Port.CheckPlace() > count;
         }
         public static bool operator <(Port<T, A> Port, int count)
         {
-            int placeCount = 0;
-            for (int i = 0; i < Port._places.Count; i++)
-            {
-                if (Port._places[i] != null)
-                {
-                    placeCount++;
-                }
-            }
-            if (placeCount < count)
-            {
-                return true;
-            }
-            return false;
+            return Port.CheckPlace() < count;
         }
         public T this[int index]
         {
@@ -163,6 +151,19 @@ namespace ship
                 g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth,
                (_pictureHeight / _placeSizeHeight) * _placeSizeHeight);
             }
+        }
+        /// <summary>
+        /// Функция получения элементы из списка
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _places.Count)
+            {
+                return null;
+            }
+            return _places[index];
         }
     }
 }

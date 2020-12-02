@@ -20,6 +20,24 @@ namespace ship
         /// </summary>
         protected readonly int shipHeight = 100;
         /// <summary>
+        /// Разделитель для записи информации по объекту в файл
+        /// </summary>
+        protected readonly char separator = ';';
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public DefaultShip(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
+        /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -154,6 +172,10 @@ namespace ship
             g.FillEllipse(brWh, (int)_startPosX + 42, (int)_startPosY - 10, 8, 8);
             g.DrawEllipse(pen, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
             g.FillEllipse(brWh, (int)_startPosX + 61, (int)_startPosY - 9, 7, 7);
+        }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
         }
     }
 }
