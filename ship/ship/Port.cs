@@ -81,13 +81,13 @@ namespace ship
         /// <returns></returns>
         public static T operator -(Port<T, A> Port, int index)
         {
-            if (index < -1 || index > Port._places.Count)
+            if (index > -1 && index <= Port._places.Count - 1)
             {
-                return null;
+                T ship = Port._places[index];
+                Port._places.RemoveAt(index);
+                return ship; 
             }
-            T ship = Port._places[index];
-            Port._places.RemoveAt(index);
-            return ship;
+            return null;
         }
         private int CheckPlace()
         {

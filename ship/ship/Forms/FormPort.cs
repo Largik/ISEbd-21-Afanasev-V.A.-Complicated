@@ -67,7 +67,7 @@ namespace ship
                     _removeShip.Push(ship);
                 }
                 Draw();
-            }
+            } 
         }
         private void buttonAddPort_Click(object sender, EventArgs e)
         {
@@ -103,12 +103,9 @@ namespace ship
         {
             if (_removeShip.Count > 0)
             {
-                if (_removeShip.Count > 0)
-                {
-                    FormShip form = new FormShip();
-                    form.SetShip((Ship)_removeShip.Pop());
-                    form.ShowDialog();
-                }
+                FormShip form = new FormShip();
+                form.SetShip((Ship)_removeShip.Pop());
+                form.ShowDialog();
             }
         }
         private void buttonSetShip_Click(object sender, EventArgs e)
