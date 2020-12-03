@@ -165,5 +165,9 @@ namespace ship
             }
             return _places[index];
         }
+        public void Clear()
+        {
+            _places.Clear();
+        }
     }
 }

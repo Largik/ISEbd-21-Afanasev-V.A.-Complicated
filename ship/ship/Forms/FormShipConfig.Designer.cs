@@ -34,6 +34,8 @@
             this.panelShip = new System.Windows.Forms.Panel();
             this.pictureBoxTypeShip = new System.Windows.Forms.PictureBox();
             this.groupBoxParams = new System.Windows.Forms.GroupBox();
+            this.countPipe = new System.Windows.Forms.Label();
+            this.numericUpDownPipe = new System.Windows.Forms.NumericUpDown();
             this.checkBoxCabin = new System.Windows.Forms.CheckBox();
             this.checkBoxLines = new System.Windows.Forms.CheckBox();
             this.numericUpDownWeight = new System.Windows.Forms.NumericUpDown();
@@ -53,20 +55,18 @@
             this.labelMainColor = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.numericUpDownPipe = new System.Windows.Forms.NumericUpDown();
-            this.countPipe = new System.Windows.Forms.Label();
             this.groupBoxPipes = new System.Windows.Forms.GroupBox();
-            this.labelDefaultPipe = new System.Windows.Forms.Label();
-            this.labelRectanglePipe = new System.Windows.Forms.Label();
             this.labelTrianglePipe = new System.Windows.Forms.Label();
+            this.labelRectanglePipe = new System.Windows.Forms.Label();
+            this.labelDefaultPipe = new System.Windows.Forms.Label();
             this.groupBoxTypeShip.SuspendLayout();
             this.panelShip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTypeShip)).BeginInit();
             this.groupBoxParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPipe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxSpeed)).BeginInit();
             this.groupBoxColors.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPipe)).BeginInit();
             this.groupBoxPipes.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,6 +139,37 @@
             this.groupBoxParams.TabIndex = 5;
             this.groupBoxParams.TabStop = false;
             this.groupBoxParams.Text = "Параметры";
+            // 
+            // countPipe
+            // 
+            this.countPipe.AutoSize = true;
+            this.countPipe.Location = new System.Drawing.Point(16, 91);
+            this.countPipe.Name = "countPipe";
+            this.countPipe.Size = new System.Drawing.Size(69, 13);
+            this.countPipe.TabIndex = 8;
+            this.countPipe.Text = "Кол-во труб:";
+            // 
+            // numericUpDownPipe
+            // 
+            this.numericUpDownPipe.Location = new System.Drawing.Point(96, 91);
+            this.numericUpDownPipe.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownPipe.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownPipe.Name = "numericUpDownPipe";
+            this.numericUpDownPipe.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDownPipe.TabIndex = 7;
+            this.numericUpDownPipe.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
             // checkBoxCabin
             // 
@@ -269,7 +300,7 @@
             // 
             // panelColorBlue
             // 
-            this.panelColorBlue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panelColorBlue.BackColor = System.Drawing.Color.Blue;
             this.panelColorBlue.Location = new System.Drawing.Point(76, 111);
             this.panelColorBlue.Name = "panelColorBlue";
             this.panelColorBlue.Size = new System.Drawing.Size(37, 35);
@@ -301,7 +332,7 @@
             // 
             // panelColorGreen
             // 
-            this.panelColorGreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panelColorGreen.BackColor = System.Drawing.Color.Green;
             this.panelColorGreen.Location = new System.Drawing.Point(76, 69);
             this.panelColorGreen.Name = "panelColorGreen";
             this.panelColorGreen.Size = new System.Drawing.Size(37, 35);
@@ -360,37 +391,6 @@
             this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // numericUpDownPipe
-            // 
-            this.numericUpDownPipe.Location = new System.Drawing.Point(96, 91);
-            this.numericUpDownPipe.Maximum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDownPipe.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownPipe.Name = "numericUpDownPipe";
-            this.numericUpDownPipe.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDownPipe.TabIndex = 7;
-            this.numericUpDownPipe.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // countPipe
-            // 
-            this.countPipe.AutoSize = true;
-            this.countPipe.Location = new System.Drawing.Point(16, 91);
-            this.countPipe.Name = "countPipe";
-            this.countPipe.Size = new System.Drawing.Size(69, 13);
-            this.countPipe.TabIndex = 8;
-            this.countPipe.Text = "Кол-во труб:";
-            // 
             // groupBoxPipes
             // 
             this.groupBoxPipes.Controls.Add(this.labelTrianglePipe);
@@ -403,16 +403,16 @@
             this.groupBoxPipes.TabStop = false;
             this.groupBoxPipes.Text = "Тип труб";
             // 
-            // labelDefaultPipe
+            // labelTrianglePipe
             // 
-            this.labelDefaultPipe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelDefaultPipe.Location = new System.Drawing.Point(18, 21);
-            this.labelDefaultPipe.Name = "labelDefaultPipe";
-            this.labelDefaultPipe.Size = new System.Drawing.Size(122, 27);
-            this.labelDefaultPipe.TabIndex = 2;
-            this.labelDefaultPipe.Text = "Стандартные";
-            this.labelDefaultPipe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelDefaultPipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelPipe_MouseDown);
+            this.labelTrianglePipe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelTrianglePipe.Location = new System.Drawing.Point(18, 86);
+            this.labelTrianglePipe.Name = "labelTrianglePipe";
+            this.labelTrianglePipe.Size = new System.Drawing.Size(122, 27);
+            this.labelTrianglePipe.TabIndex = 4;
+            this.labelTrianglePipe.Text = "Треугольные";
+            this.labelTrianglePipe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTrianglePipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelPipe_MouseDown);
             // 
             // labelRectanglePipe
             // 
@@ -425,16 +425,16 @@
             this.labelRectanglePipe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelRectanglePipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelPipe_MouseDown);
             // 
-            // labelTrianglePipe
+            // labelDefaultPipe
             // 
-            this.labelTrianglePipe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelTrianglePipe.Location = new System.Drawing.Point(18, 86);
-            this.labelTrianglePipe.Name = "labelTrianglePipe";
-            this.labelTrianglePipe.Size = new System.Drawing.Size(122, 27);
-            this.labelTrianglePipe.TabIndex = 4;
-            this.labelTrianglePipe.Text = "Треугольные";
-            this.labelTrianglePipe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelTrianglePipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelPipe_MouseDown);
+            this.labelDefaultPipe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelDefaultPipe.Location = new System.Drawing.Point(18, 21);
+            this.labelDefaultPipe.Name = "labelDefaultPipe";
+            this.labelDefaultPipe.Size = new System.Drawing.Size(122, 27);
+            this.labelDefaultPipe.TabIndex = 2;
+            this.labelDefaultPipe.Text = "Стандартные";
+            this.labelDefaultPipe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelDefaultPipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelPipe_MouseDown);
             // 
             // FormShipConfig
             // 
@@ -455,10 +455,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTypeShip)).EndInit();
             this.groupBoxParams.ResumeLayout(false);
             this.groupBoxParams.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPipe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxSpeed)).EndInit();
             this.groupBoxColors.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPipe)).EndInit();
             this.groupBoxPipes.ResumeLayout(false);
             this.ResumeLayout(false);
 

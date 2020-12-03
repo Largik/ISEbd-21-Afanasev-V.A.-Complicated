@@ -50,8 +50,7 @@ namespace ship
                 portCollection[listBoxPorts.SelectedItem.ToString()].Draw(gr);
                 pictureBoxPort.Image = bmp;
             }
-        }
-        
+        }       
         /// <summary>
         /// Обработка нажатия кнопки "забрать"
         /// </summary>
@@ -131,15 +130,70 @@ namespace ship
                 }
             }
         }
-
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void загрузитьToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (portCollection.LoadData(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void сохранитьToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (portCollection.SaveData(saveFileDialog.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
-        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void загрузитьПортToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (portCollection.LoadPort(openFileDialog.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
+        private void сохранитьПортToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBoxPorts.SelectedIndex > -1)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    if (portCollection.SavePort(saveFileDialog.FileName, listBoxPorts.SelectedItem.ToString()))
+                    {
+                        MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

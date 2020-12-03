@@ -78,7 +78,7 @@ namespace ship
                 case "labelDefaultPipe":
                     if(ship is MotorShip)
                     {
-                        details = new PipesDefault((int)numericUpDownPipe.Value, dopColor);
+                        details = new PipesDefault((int)numericUpDownPipe.Value);
                         MotorShip mShip = (MotorShip)ship;
                         mShip.SetPipeForm(details);
                     }
@@ -86,7 +86,7 @@ namespace ship
                 case "labelRectanglePipe":
                     if (ship is MotorShip)
                     {
-                        details = new PipeRectangle((int)numericUpDownPipe.Value, dopColor);
+                        details = new PipeRectangle((int)numericUpDownPipe.Value);
                         MotorShip mShip = (MotorShip)ship;
                         mShip.SetPipeForm(details);
                     }
@@ -94,7 +94,7 @@ namespace ship
                 case "labelTrianglePipe":
                     if (ship is MotorShip)
                     {
-                        details = new PipeTriangle((int)numericUpDownPipe.Value, dopColor);
+                        details = new PipeTriangle((int)numericUpDownPipe.Value);
                         MotorShip mShip = (MotorShip)ship;
                         mShip.SetPipeForm(details);
                     }
@@ -139,9 +139,12 @@ namespace ship
             if (ship is MotorShip)
             {
                 MotorShip SHip = (MotorShip)ship;
-                dopColor = ((Color)(e.Data.GetData(typeof(Color))));
-                SHip.SetDopColor((Color)(e.Data.GetData(typeof(Color))));
-                DrawShip();
+                if(details != null)
+                {
+                    dopColor = ((Color)(e.Data.GetData(typeof(Color))));
+                    SHip.SetDopColor((Color)(e.Data.GetData(typeof(Color))));
+                    DrawShip();
+                }
             }
         }
         private void panelColor_MouseDown(object sender, MouseEventArgs e)

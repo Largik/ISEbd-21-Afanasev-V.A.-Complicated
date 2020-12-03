@@ -13,10 +13,9 @@ namespace ship
         private Color pipeColor;
         private Pen pen = new Pen(Color.Black);
         private SolidBrush brush;
-        public PipesDefault(int count, Color dopColor)
+        public PipesDefault(int count)
         {
             Count = count;
-            pipeColor = dopColor;
         }
         public void SetDopColor(Color color)
         {
@@ -128,6 +127,10 @@ namespace ship
             g.DrawLine(pen, pipe34, pipe35);
             g.DrawCurve(pen, PIPE32);
             g.DrawCurve(pen, PIPE33);
+        }
+        public override string ToString()
+        {
+            return this.GetType().Name + "." + Convert.ToInt32(_countPipe);
         }
     }
 }

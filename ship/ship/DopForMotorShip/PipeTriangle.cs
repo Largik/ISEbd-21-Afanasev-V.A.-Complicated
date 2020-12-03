@@ -13,10 +13,9 @@ namespace ship
         private Color pipeColor;
         private Pen pen = new Pen(Color.Black);
         private SolidBrush brush;
-        public PipeTriangle(int count, Color dopColor)
+        public PipeTriangle(int count)
         {
             Count = count;
-            pipeColor = dopColor;
         }
         public void SetDopColor(Color color)
         {
@@ -64,6 +63,10 @@ namespace ship
                 new Point((int)_startPosX + 101, (int)_startPosY - 12)};
             g.DrawPolygon(pen, threePipe);
             g.FillPolygon(brush, threePipe);
+        }
+        public override string ToString()
+        {
+            return this.GetType().Name + "." + Convert.ToInt32(_countPipe);
         }
     }
 }

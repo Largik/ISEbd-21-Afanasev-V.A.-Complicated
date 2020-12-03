@@ -46,6 +46,9 @@
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.портToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьПортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьПортToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPort)).BeginInit();
             this.groupBoxTakeShip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -167,7 +170,8 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem});
+            this.файлToolStripMenuItem,
+            this.портToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(873, 24);
@@ -188,12 +192,14 @@
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click_1);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
             this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click_1);
             // 
             // saveFileDialog
             // 
@@ -203,6 +209,29 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "txt file | *.txt";
+            // 
+            // портToolStripMenuItem
+            // 
+            this.портToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.загрузитьПортToolStripMenuItem,
+            this.сохранитьПортToolStripMenuItem});
+            this.портToolStripMenuItem.Name = "портToolStripMenuItem";
+            this.портToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.портToolStripMenuItem.Text = "Порт";
+            // 
+            // загрузитьПортToolStripMenuItem
+            // 
+            this.загрузитьПортToolStripMenuItem.Name = "загрузитьПортToolStripMenuItem";
+            this.загрузитьПортToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьПортToolStripMenuItem.Text = "Загрузить порт";
+            this.загрузитьПортToolStripMenuItem.Click += new System.EventHandler(this.загрузитьПортToolStripMenuItem_Click);
+            // 
+            // сохранитьПортToolStripMenuItem
+            // 
+            this.сохранитьПортToolStripMenuItem.Name = "сохранитьПортToolStripMenuItem";
+            this.сохранитьПортToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьПортToolStripMenuItem.Text = "Сохранить порт";
+            this.сохранитьПортToolStripMenuItem.Click += new System.EventHandler(this.сохранитьПортToolStripMenuItem_Click);
             // 
             // FormPort
             // 
@@ -251,5 +280,8 @@
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem портToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьПортToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьПортToolStripMenuItem;
     }
 }

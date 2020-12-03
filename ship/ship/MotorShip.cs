@@ -37,6 +37,7 @@ namespace ship
             DopColor = dopColor;
             Cabin = cabin;
             Line = line;    
+
         }
         /// <summary>
         /// Конструктор для загрузки с файла
@@ -53,7 +54,21 @@ namespace ship
                 DopColor = Color.FromName(strs[3]);
                 Cabin = Convert.ToBoolean(strs[4]);
                 Line = Convert.ToBoolean(strs[5]);
-                Pipe = Convert.ToBoolean(strs[6]);
+                switch (strs[6].Split('.')[0])
+                {
+                    case "PipesDefault":
+                        details = new PipesDefault(Convert.ToInt32(strs[6].Split('.')[1]));
+                        details.SetDopColor(DopColor);
+                        break;
+                    case "PipeRectangle":
+                        details = new PipeRectangle(Convert.ToInt32(strs[6].Split('.')[1]));
+                        details.SetDopColor(DopColor); 
+                        break;
+                    case "PipeTriangle":
+                        details = new PipeTriangle(Convert.ToInt32(strs[6].Split('.')[1]));
+                        details.SetDopColor(DopColor);
+                        break;
+                }
             }
         }
         public void SetPipeForm(IDetails idetails)
@@ -118,7 +133,7 @@ namespace ship
         }
         public override string ToString()
         {
-            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Cabin}{separator}{Line}{separator}{Pipe}";
+            return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Cabin}{separator}{Line}{separator}{details}";
         }
     }
 }

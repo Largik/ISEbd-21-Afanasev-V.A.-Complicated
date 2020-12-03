@@ -13,10 +13,9 @@ namespace ship
         private Color pipeColor;
         private Pen pen = new Pen(Color.Black);
         private SolidBrush brush;
-        public PipeRectangle(int count, Color dopColor)
+        public PipeRectangle(int count)
         {
             Count = count;
-            pipeColor = dopColor;
         }
         public int Count { set => _countPipe = (DetailsEnum)value; }
         public void DrawDetails(Graphics g, float _startX, float _startY)
@@ -56,6 +55,11 @@ namespace ship
         public void SetDopColor(Color color)
         {
             pipeColor = color;        
+        }
+
+        public override string ToString()
+        {
+            return this.GetType().Name + "." + Convert.ToInt32(_countPipe);
         }
     }
 }

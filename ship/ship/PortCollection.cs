@@ -67,6 +67,10 @@ namespace ship
         /// <returns></returns>
         public bool SaveData(string filename)
         {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
             using (StreamWriter streamWriter = new StreamWriter(filename, false, System.Text.Encoding.Default))
             {
                 streamWriter.WriteLine("PortCollection");
@@ -88,6 +92,85 @@ namespace ship
                                 streamWriter.Write("MotorShip" + separator);
                             }
                             streamWriter.WriteLine(ship);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        public bool SavePort(string filename,string key)
+        {
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            using (StreamWriter streamWriter = new StreamWriter(filename, false, System.Text.Encoding.Default))
+            {
+                if (portStages.ContainsKey(key))
+                {
+                    streamWriter.WriteLine("Port" + separator + key);
+
+                    ITransport ship = null;
+                    for (int i = 0; (ship = portStages[key].GetNext(i)) != null; i++)
+                    {
+                        if (ship != null)
+                        {
+                            if (ship.GetType().Name == "DefaultShip")
+                            {
+                                streamWriter.Write("DefaultShip" + separator);
+                            }
+                            if (ship.GetType().Name == "MotorShip")
+                            {
+                                streamWriter.Write("MotorShip" + separator);
+                            }
+                            streamWriter.WriteLine(ship);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        public bool LoadPort(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                return false;
+            }
+
+            using (StreamReader streamReader = new StreamReader(filename, System.Text.Encoding.Default))
+            {
+                string line = streamReader.ReadLine();
+                if (!line.Contains("Port" + separator))
+                {
+                    return false;
+                }
+
+                string key = line.Split(separator)[1];
+                if (portStages.ContainsKey(key))
+                {
+                    portStages[key].Clear();
+                }
+                else
+                {
+                    portStages.Add(key, new Port<Ship, IDetails>(pictureWidth, pictureHeight));
+                }
+
+                Ship ship = null;
+                for (int i = 0; (line = streamReader.ReadLine()) != null; i++)
+                {
+                    if (line.Contains(separator))
+                    {
+                        if (line.Contains("MotorShip"))
+                        {
+                            ship = new MotorShip(line.Split(separator)[1]);
+                        }
+                        else if (line.Contains("DefaultShip"))
+                        {
+                            ship = new DefaultShip(line.Split(separator)[1]);
+                        }
+                        if (!(portStages[key] + ship))
+                        {
+                            return false;
                         }
                     }
                 }
