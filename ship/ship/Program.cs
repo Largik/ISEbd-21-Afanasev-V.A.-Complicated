@@ -19,6 +19,5 @@ namespace ship
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormPort());
         }
-        
     }
 }
