@@ -67,7 +67,7 @@ namespace ship
         {
             if (Port._places.Count >= Port._maxCount)
             {
-                return false;
+                throw new PortOverflowException();
             }
             Port._places.Add(ship);
             return true;
@@ -81,9 +81,9 @@ namespace ship
         /// <returns></returns>
         public static T operator -(Port<T, A> Port, int index)
         {
-            if (index < -1 || index > Port._places.Count)
+            if (index < -1 || index > Port._places.Count || Port._places.Count == 0)
             {
-                return null;
+                throw new PortNotFoundException(index);
             }
             T ship = Port._places[index];
             Port._places.RemoveAt(index);

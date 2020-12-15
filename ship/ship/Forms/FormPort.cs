@@ -1,6 +1,8 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ship
@@ -12,11 +14,13 @@ namespace ship
         /// </summary>
         private readonly PortCollection portCollection;
         private readonly Stack<Ship> _removeShip;
+        private readonly Logger logger;
         public FormPort()
         {
             InitializeComponent();
             portCollection = new PortCollection(pictureBoxPort.Width, pictureBoxPort.Height);
             _removeShip = new Stack<Ship>();
+            logger = LogManager.GetCurrentClassLogger();
         }
         /// <summary>
         /// Заполнение listBoxLevels
@@ -60,12 +64,26 @@ namespace ship
         {
             if (listBoxPorts.SelectedIndex > -1 && maskedTextBoxPlaceShip.Text != "")
             {
-                var ship = portCollection[listBoxPorts.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxPlaceShip.Text);
-                if (ship != null)
+                try
                 {
-                    _removeShip.Push(ship);
+                    var ship = portCollection[listBoxPorts.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxPlaceShip.Text);
+                    if (ship != null)
+                    {
+                        _removeShip.Push(ship);
+                        logger.Info($"Изъят корабль {ship} с места { maskedTextBoxPlaceShip.Text} ");
+                        Draw();
+                    }
                 }
-                Draw();
+                catch (PortNotFoundException ex)
+                {
+                    logger.Warn($"Корабль {maskedTextBoxPlaceShip.Text} не найден");
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Fatal($"Корабль {maskedTextBoxPlaceShip.Text} не найден");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void buttonAddPort_Click(object sender, EventArgs e)
@@ -76,6 +94,7 @@ namespace ship
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info($"Добавили порт {textBoxNewLevelName.Text}");
             portCollection.AddPort(textBoxNewLevelName.Text);
             ReloadLevels();
         }
@@ -85,6 +104,7 @@ namespace ship
             {
                 if (MessageBox.Show($"Удалить парковку { listBoxPorts.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалили порт { listBoxPorts.SelectedItem.ToString()} ");
                     portCollection.DelPort(textBoxNewLevelName.Text);
                     ReloadLevels();
                     if (listBoxPorts.Items.Count <= 0)
@@ -96,6 +116,7 @@ namespace ship
         }
         private void listBoxPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли на порт { listBoxPorts.SelectedItem.ToString()}");
             Draw();
         }
         private void buttonTakeFromRemoved_Click(object sender, EventArgs e)
@@ -120,13 +141,22 @@ namespace ship
         {
             if (ship != null && listBoxPorts.SelectedIndex > -1)
             {
-                if ((portCollection[listBoxPorts.SelectedItem.ToString()]) + ship)
+                try
                 {
-                    Draw();
+                    if ((portCollection[listBoxPorts.SelectedItem.ToString()]) + ship)
+                    {
+                        Draw();
+                    }
                 }
-                else
+                catch (PortOverflowException ex)
                 {
-                    MessageBox.Show("Корабль не удалось поставить");
+                    logger.Warn($"Порт {listBoxPorts.SelectedItem.ToString()} переполнен");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Fatal("Корабль не поставлен");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -134,15 +164,33 @@ namespace ship
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (portCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    portCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ReloadLevels();
                     Draw();
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                 }
-                else
+                catch (PortOverflowException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn($"Порт {listBoxPorts.SelectedItem.ToString()} переполнен");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    logger.Error($"Порт {listBoxPorts.SelectedItem.ToString()} не загружен, не найден файл");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (FormatException ex)
+                {
+                    logger.Error($"Порт {listBoxPorts.SelectedItem.ToString()} не загружен, не вервый формат файла");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Fatal("Не загружено");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -150,13 +198,16 @@ namespace ship
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (portCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    portCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Fatal("Не сохранено");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -165,15 +216,33 @@ namespace ship
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (portCollection.LoadPort(openFileDialog.FileName))
+                try
                 {
+                    portCollection.LoadPort(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ReloadLevels();
                     Draw();
+                    logger.Info("Порт загружен из файла " + openFileDialog.FileName);
                 }
-                else
+                catch (PortOverflowException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn($"Порт {listBoxPorts.SelectedItem.ToString()} переполнен");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch(FileNotFoundException ex)
+                {
+                    logger.Error($"Порт {listBoxPorts.SelectedItem.ToString()} не загружен, не найден файл");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch(FormatException ex)
+                {
+                    logger.Error($"Порт {listBoxPorts.SelectedItem.ToString()} не загружен, не вервый формат файла");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Fatal("Не загружено");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -184,13 +253,16 @@ namespace ship
             {
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (portCollection.SavePort(saveFileDialog.FileName, listBoxPorts.SelectedItem.ToString()))
+                    try
                     {
+                        portCollection.SavePort(saveFileDialog.FileName, listBoxPorts.SelectedItem.ToString());
                         MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        logger.Info("Порт сохранен в файл " + saveFileDialog.FileName);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        logger.Fatal("Не сохранено");
+                        MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

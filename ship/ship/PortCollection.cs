@@ -65,7 +65,7 @@ namespace ship
         /// </summary>
         /// <param name="filename">Путь и имя файла</param>
         /// <returns></returns>
-        public bool SaveData(string filename)
+        public void SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -95,10 +95,9 @@ namespace ship
                         }
                     }
                 }
-                return true;
             }
         }
-        public bool SavePort(string filename,string key)
+        public void SavePort(string filename,string key)
         {
             if (File.Exists(filename))
             {
@@ -127,24 +126,21 @@ namespace ship
                         }
                     }
                 }
-                return true;
             }
         }
-        public bool LoadPort(string filename)
+        public void LoadPort(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
-
             using (StreamReader streamReader = new StreamReader(filename, System.Text.Encoding.Default))
             {
                 string line = streamReader.ReadLine();
                 if (!line.Contains("Port" + separator))
                 {
-                    return false;
+                    throw new FormatException();
                 }
-
                 string key = line.Split(separator)[1];
                 if (portStages.ContainsKey(key))
                 {
@@ -154,7 +150,6 @@ namespace ship
                 {
                     portStages.Add(key, new Port<Ship, IDetails>(pictureWidth, pictureHeight));
                 }
-
                 Ship ship = null;
                 for (int i = 0; (line = streamReader.ReadLine()) != null; i++)
                 {
@@ -170,11 +165,10 @@ namespace ship
                         }
                         if (!(portStages[key] + ship))
                         {
-                            return false;
+                            throw new PortOverflowException();
                         }
                     }
                 }
-                return true;
             }
         }
         /// <summary>
@@ -182,11 +176,11 @@ namespace ship
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader streamReader = new StreamReader(filename, System.Text.Encoding.Default))
             {
@@ -196,7 +190,7 @@ namespace ship
                 }
                 else
                 {
-                    return false;
+                    throw new FormatException();
                 }
                 Ship ship = null;
                 string key = string.Empty;
@@ -221,11 +215,10 @@ namespace ship
 
                         if (!(portStages[key] + ship))
                         {
-                            return false;
+                            throw new PortOverflowException();
                         }
                     }
                 }
-                return true;
             }
         }
        public Ship this[string PortIndex, int placeIndex]
