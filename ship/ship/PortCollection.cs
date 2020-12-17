@@ -103,10 +103,11 @@ namespace ship
             {
                 File.Delete(filename);
             }
-            using (StreamWriter streamWriter = new StreamWriter(filename, false, System.Text.Encoding.Default))
+            if (portStages.ContainsKey(key))
             {
-                if (portStages.ContainsKey(key))
+                using (StreamWriter streamWriter = new StreamWriter(filename, false, System.Text.Encoding.Default))
                 {
+                
                     streamWriter.WriteLine("Port" + separator + key);
 
                     ITransport ship = null;
