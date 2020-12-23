@@ -95,6 +95,7 @@
     <Compile Include="Enums\DetailsEnum.cs" />
     <Compile Include="DopForMotorShip\PipeTriangle.cs" />
     <Compile Include="Port.cs" />
+    <Compile Include="PortAlreadyHaveException.cs" />
     <Compile Include="PortCollection.cs" />
     <Compile Include="PortNotFoundException.cs" />
     <Compile Include="PortOverflowException.cs" />
@@ -106,6 +107,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="AbstractClasses\Ship.cs" />
+    <Compile Include="ShipComparer.cs" />
     <EmbeddedResource Include="Forms\FormPort.resx">
       <DependentUpon>FormPort.cs</DependentUpon>
     </EmbeddedResource>
