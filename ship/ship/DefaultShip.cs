@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ship
 {
-    public class DefaultShip : Ship
+    public class DefaultShip : Ship, IEquatable<DefaultShip>, IComparable<DefaultShip>, IEnumerator<string>
     {
         /// <summary>
         /// Ширина отрисовки корабля
@@ -23,6 +24,7 @@ namespace ship
         /// Разделитель для записи информации по объекту в файл
         /// </summary>
         protected readonly char separator = ';';
+        private int currentIndex;
         /// <summary>
         /// Конструктор для загрузки с файла
         /// </summary>
@@ -176,6 +178,100 @@ namespace ship
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+        public bool Equals(DefaultShip other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is DefaultShip defShipObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(defShipObj);
+            }
+        }
+        public string Current
+        {
+            get
+            {
+                switch (currentIndex)
+                {
+                    case 0:
+                        return MaxSpeed.ToString();
+                    case 1:
+                        return Weight.ToString();
+                    case 2:
+                        return MainColor.Name;
+                }
+                return null;
+            }
+        }
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+        public int CompareTo(DefaultShip other)
+        {
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(other.MaxSpeed);
+            }
+            if (Weight != other.Weight)
+            {
+                return Weight.CompareTo(other.Weight);
+            }
+            if (MainColor != other.MainColor)
+            {
+                return MainColor.Name.CompareTo(other.MainColor.Name);
+            }
+            return 0;
+        }
+        public void Dispose()
+        {
+        }
+        public bool MoveNext()
+        {
+            currentIndex++;
+            return (currentIndex < 3);
+        }
+        public void Reset()
+        {
+            currentIndex = -1;
+        }
+        public IEnumerator<string> GetEnumerator()
+        {
+            return this;
         }
     }
 }

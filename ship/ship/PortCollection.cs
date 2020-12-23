@@ -78,8 +78,7 @@ namespace ship
                 {
                     streamWriter.WriteLine("Port" + separator + level.Key);
 
-                    Ship ship = null;
-                    for (int i = 0; (ship = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport ship in level.Value)
                     {
                         if (ship != null)
                         {
@@ -110,8 +109,7 @@ namespace ship
                 
                     streamWriter.WriteLine("Port" + separator + key);
 
-                    ITransport ship = null;
-                    for (int i = 0; (ship = portStages[key].GetNext(i)) != null; i++)
+                    foreach (ITransport ship in portStages[key])
                     {
                         if (ship != null)
                         {

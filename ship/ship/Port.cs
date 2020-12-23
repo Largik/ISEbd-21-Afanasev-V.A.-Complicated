@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace ship
 {
@@ -11,7 +12,8 @@ namespace ship
     /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class Port<T, A> where T : class, ITransport where A: class, IDetails
+    class Port<T, A> : IEnumerator<T>, IEnumerable<T>
+        where T : class, ITransport where A: class, IDetails
     {
         /// <summary>
         /// Список объектов, которые храним
@@ -41,6 +43,9 @@ namespace ship
         /// Свободные места
         /// </summary>
         private readonly int _column;
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -168,6 +173,46 @@ namespace ship
         public void Clear()
         {
             _places.Clear();
+        }
+        ///<summary>
+        ///Сортировка кораблей на парковке
+        ///</summary>
+        public void Sort() => _places.Sort((IComparer<T>)new ShipComparer());
+        ///<summary>
+        ///Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        ///</summary>
+        public void Dispose()
+        {
+        }
+        ///<summary>
+        ///Метод интерфейса IEnumerator для перехода к следующему элементу или началу коллекции
+        ///</summary>
+        ///<returns></returns>
+        public bool MoveNext()
+        {
+            _currentIndex++;
+            return (_currentIndex < _places.Count);
+        }
+        ///<summary>
+        ///Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        ///</summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        ///<summary>
+        ///Метод интерфейса IEnumerable
+        ///</summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        ///<summary>
+        ///Метод интерфейса IEnumerable
+        ///</summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }

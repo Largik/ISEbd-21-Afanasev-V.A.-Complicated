@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ship
 {
-    public class MotorShip : DefaultShip
+    public class MotorShip : DefaultShip, IEquatable<MotorShip>, IComparable<MotorShip>, IEnumerator<string>
     {
         private IDetails details;
         public bool Cabin { private set; get; }
@@ -16,6 +17,7 @@ namespace ship
         /// Дополнительный цвет
         /// </summary>
         public Color DopColor { protected set; get; }
+        private int currentIndex;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -37,7 +39,6 @@ namespace ship
             DopColor = dopColor;
             Cabin = cabin;
             Line = line;    
-
         }
         /// <summary>
         /// Конструктор для загрузки с файла
@@ -134,6 +135,136 @@ namespace ship
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Cabin}{separator}{Line}{separator}{details}";
+        }
+        public bool Equals(MotorShip other)
+        {
+            var res = base.Equals(other);
+            if (!res)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Cabin != other.Cabin)
+            {
+                return false;
+            }
+            if (Line != other.Line)
+            {
+                return false;
+            }
+            if ((details != null) && (other.details != null))
+            {
+                if (details.ToString() != other.details.ToString())
+                {
+                    return false;
+                }
+            }
+            if (details != null ^ other.details != null)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is MotorShip motShipObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(motShipObj);
+            }
+        }
+        public new string Current
+        {
+            get
+            {
+                switch (currentIndex)
+                {
+                    case 0:
+                        return MaxSpeed.ToString();
+                    case 1:
+                        return Weight.ToString();
+                    case 2:
+                        return MainColor.Name;
+                    case 3:
+                        return DopColor.Name;
+                    case 4:
+                        return Cabin.ToString();
+                    case 5:
+                        return Line.ToString();
+                    case 6:
+                        return details.ToString();
+                }
+                return null;
+            }
+        }
+        object IEnumerator.Current
+        {
+            get
+            {
+                return Current;
+            }
+        }
+        public new void Dispose()
+        {
+        }
+        public new bool MoveNext()
+        {
+            currentIndex++;
+            return (currentIndex < 6);
+        }
+        public new void Reset()
+        {
+            currentIndex = -1;
+        }
+        public new IEnumerator<string> GetEnumerator()
+        {
+            return this;
+        }
+        public int CompareTo(MotorShip other)
+        {
+            var res = base.CompareTo(other as DefaultShip);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            if (Cabin != other.Cabin)
+            {
+                return Cabin.CompareTo(other.Cabin);
+            }
+            if (Line != other.Line)
+            {
+                return Line.CompareTo(other.Line);
+            }
+            if ((details != null) && (other.details != null))
+            {
+                if (details.ToString() != other.details.ToString())
+                {
+                    return details.ToString().CompareTo(other.details.ToString());
+                }
+            }
+            if ((details == null) && (other.details != null))
+            {
+                return 1;
+            }
+            if ((details != null) && (other.details == null))
+            {
+                return -1;
+            }
+            return 0;
         }
     }
 }
